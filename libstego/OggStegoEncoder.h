@@ -32,6 +32,8 @@ public:
 	~OggStegoEncoder(void);
 
 	//size_t Encode(FILE *instream, FILE *outstream, bool encMes=false);
+	//size_t ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec);
+	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec)
 
 #if _DEBUG
 	void SetLogs(FILE *v, FILE *c, FILE *t);
