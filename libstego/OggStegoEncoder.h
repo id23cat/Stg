@@ -1,15 +1,14 @@
 #pragma once
 #include "StegoEncoder.h"
-
 #include "iostream"
+extern "C"
+{	
+	//#include <..\libvorbis-1.2.3\include\vorbis/codec.h>
+	#include <vorbis/codec.h>
+	#include <vorbis/vorbisenc.h>
+}
 using namespace std;
 
-extern "C"
-{
-#include <vorbis/vorbisenc.h>
-//#include <vorbis/vorbisdec.h>
-#include <vorbis/codec.h>
-}
 
 #ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS

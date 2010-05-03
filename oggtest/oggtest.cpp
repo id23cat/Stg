@@ -11,13 +11,15 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	FILE *instream, *outstream, *mes;
-	if( (instream = _wfsopen( argv[2], _T("r+"), _SH_DENYNO)) == NULL )
+	//if( (instream = _wfsopen( argv[2], _T("r+"), _SH_DENYNO)) == NULL )
+	if( (instream = _wfsopen( argv[2], _T("r"), _SH_DENYNO)) == NULL )
 	{
 		fwprintf(stderr,_T("Can not open file %s\n"), argv[2]);
 		getch();
 		exit(1);
 	};
-	if( (outstream = _wfsopen( argv[3], _T("r+"), _SH_DENYNO)) == NULL )
+	//if( (outstream = _wfsopen( argv[3], _T("r+"), _SH_DENYNO)) == NULL )
+	if( (outstream = _wfsopen( argv[3], _T("w"), _SH_DENYNO)) == NULL )
 	{
 		fwprintf(stderr,_T("Can not open file %s\n"), argv[3]);
 		getch();
@@ -25,7 +27,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	
 	OggStegoEncoder enc;
-	//enc.ReEncode(instream,outstream,1);
+	enc.ReEncode(instream,outstream,1);
 
 	//char buffer[1];
 	//char str[]="123";

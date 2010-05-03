@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;&quot;$(SolutionDir)\libstego&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libstego&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;&quot;$(SolutionDir)\libogg\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libstego.lib"
+				AdditionalDependencies="libstego.lib libvorbis.lib libogg.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;"
+				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -169,6 +170,14 @@
 		<ProjectReference
 			ReferencedProjectIdentifier="{63529F3E-DD45-4A7E-89A9-410C193621BC}"
 			RelativePathToProject=".\libstego\libogg-stego.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{3A214E06-B95E-4D61-A291-1F8DF2EC10FD}"
+			RelativePathToProject=".\libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_static.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
+			RelativePathToProject=".\libogg\win32\VS2008\libogg_static.vcproj"
 		/>
 	</References>
 	<Files>

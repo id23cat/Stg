@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Work\Stego-project\libbmp\&quot;;&quot;$(SolutionDir)\libogg\include\ogg&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\jpeg-8a\&quot;;&quot;$(SolutionDir)\libbmp\&quot;;&quot;$(SolutionDir)\libogg\include\ogg&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBOGGSTEGO_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
