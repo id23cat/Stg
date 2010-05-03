@@ -4,6 +4,13 @@
 #include "iostream"
 using namespace std;
 
+extern "C"
+{
+#include <vorbis/vorbisenc.h>
+//#include <vorbis/vorbisdec.h>
+#include <vorbis/codec.h>
+}
+
 #ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS
 //#define LIBOGGSTEGODLL __declspec(dllexport)
@@ -33,7 +40,7 @@ public:
 
 	//size_t Encode(FILE *instream, FILE *outstream, bool encMes=false);
 	//size_t ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec);
-	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec)
+	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes);
 
 #if _DEBUG
 	void SetLogs(FILE *v, FILE *c, FILE *t);

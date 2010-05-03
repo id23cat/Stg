@@ -89,7 +89,7 @@ typedef struct vorbis_dsp_state{
 #pragma once																				/**/
 typedef struct CallbackStruct																/**/
 {																							/**/
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0	/**/
+	int isStego;		//boolean parameter, do nothing if 0, else call callback function	/**/
 	void (*CallbackFunction)(void *vb, float *vector, int len);	//Stego function			/**/
 	void *stegoObjPtr;						//pointer to the stego ooject					/**/
 }StegoData;																					/**/

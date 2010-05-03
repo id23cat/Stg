@@ -3,6 +3,13 @@
 #include "stdio.h"
 #include "StegoDecoder.h"
 
+extern "C"
+{
+#include <vorbis/vorbisenc.h>
+//#include <vorbis/vorbisdec.h>
+#include <vorbis/codec.h>
+}
+
 #ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS
 //#define LIBOGGSTEGODLL __declspec(dllexport)

@@ -766,7 +766,7 @@ static int mapping0_forward(vorbis_block *vb){
             couple_bundle[ch_in_bundle++]=vb->pcm[j]+n/2;
 
 /*********************************************************************************/
-		if(!vb->sData.notStego)													/*****/
+		if(vb->sData.isStego)													/*****/
 			vb->sData.CallbackFunction(&vb->sData, couple_bundle[1], n/2);		/*****/
 /*********************************************************************************/
 		
@@ -888,7 +888,7 @@ static int mapping0_inverse(vorbis_block *vb,vorbis_info_mapping *l){
       inverse(vb,b->residue[info->residuesubmap[i]],
               pcmbundle,zerobundle,ch_in_bundle);
 /*********************************************************************************/
-	if(!vb->sData.notStego)														/*****/
+	if(vb->sData.isStego)														/*****/
 		vb->sData.CallbackFunction(&vb->sData, vb->pcm[1], n/2);				/*****/
 /*********************************************************************************/
 

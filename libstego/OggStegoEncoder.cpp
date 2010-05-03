@@ -146,7 +146,7 @@ size_t OggStegoEncoder::GetTotal()
 #endif
 
 //size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec)
-size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes, OggStegoDecoder *dec)
+size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 {
 	ogg_int16_t convbuffer[4096]; /* take 8k out of the data segment, not the stack */
 	signed char readbuffer[READ*4+44]; /* out of the data segment, not the stack */
@@ -445,17 +445,17 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes, O
 									   for vd here */
 			/*****************************************************************/
 			/*!!!!!!!!! set callback function !!!!!!!!!!*/ //
-			//if(decMes && dec->IsGetLength()) //
+			//if(encMes && paste_length) //
 			//{ //
-			//vb.CallbackFunction = &(dec->StegoGetLength); //
-			//vb.isStego = 1; //
-			//}else if(decMes && dec->IsGetMessage()) //
+			//	vbe.sData.CallbackFunction = &(StegoHideLength); //
+			//	vbe.sData.isStego = 1; //
+			//}else if(encMes && paste_message) //
 			//{ //
-			//vb.CallbackFunction = &(dec->StegoGetMessage); //
-			//vb.isStego = 1; //
+			//	vbe.sData.CallbackFunction = &(StegoHideMessage); //
+			//	vbe.sData.isStego = 1; //
 			//}else //
-			//vb.isStego = 0; //
-			//vb.stegoObjPtr = (void*) dec; //
+			//	vbe.sData.isStego = 0; //
+			//vbe.sData.stegoObjPtr = (void*) this; //
 			/*****************************************************************/
 
 			/* The rest is just a straight decode loop until end of stream */
