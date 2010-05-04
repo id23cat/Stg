@@ -61,7 +61,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="jpegtran.lib libbmp.lib"
 				OutputFile="$(SolutionDir)\libs\$(ProjectName).lib"
 				AdditionalLibraryDirectories="$(SolutionDir)\libs"
 				IgnoreAllDefaultLibraries="true"
@@ -161,10 +160,6 @@
 		<ProjectReference
 			ReferencedProjectIdentifier="{3A214E06-B95E-4D61-A291-1F8DF2EC10FD}"
 			RelativePathToProject=".\libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_static.vcproj"
-		/>
-		<ProjectReference
-			ReferencedProjectIdentifier="{813C33AF-9031-49D2-BA19-93D600CDD404}"
-			RelativePathToProject=".\jpeg-8a\jpegtran.vcproj"
 		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{E61592E1-28F4-4AFC-9EE1-9BE833A061C1}"

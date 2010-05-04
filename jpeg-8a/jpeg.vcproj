@@ -119,6 +119,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				OutputFile="$(SolutionDir)\libs\$(ProjectName).lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -27,7 +27,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	
 	OggStegoEncoder enc;
-	enc.ReEncode(instream,outstream,1);
+	try{
+		enc.Encode(instream,outstream,1);
+	}catch(Exception exc){
+		cout << exc.getMessage();
+	}
+
 
 	//char buffer[1];
 	//char str[]="123";

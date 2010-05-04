@@ -1,8 +1,8 @@
 #include "StegoEncoder.h"
 #include "constants.h"
 //#include <$(SolutionDir)\libbmp\BMPimage.h>
-//#include "..\libbmp\BMPimage.h"
-#include "BMPimage.h"
+#include "..\libbmp\BMPimage.h"
+//#include "BMPimage.h"
 extern "C" {
 	#include "..\jpeg-8a\jpeglib.h"
 }
