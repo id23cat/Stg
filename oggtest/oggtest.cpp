@@ -8,22 +8,24 @@
 
 
 
-int _tmain(int argc, _TCHAR* argv[])
+//int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	FILE *instream, *outstream, *mes;
-	//if( (instream = _wfsopen( argv[2], _T("r+"), _SH_DENYNO)) == NULL )
-	if( (instream = _wfsopen( argv[2], _T("r+b"), _SH_DENYNO)) == NULL )
-	//if( _wfopen_s( &instream, argv[2], _T("rb") ) != 0 )
+
+	/*if( (instream = _wfsopen( argv[2], _T("r+b"), _SH_DENYNO)) == NULL )*/
+	if( (instream = _fsopen( argv[2], ("r+b"), _SH_DENYNO)) == NULL )
 	{
-		fwprintf(stderr,_T("Can not open file %s\n"), argv[2]);
+		/*fwprintf(stderr,_T("Can not open file %s\n"), argv[2]);*/
+		fprintf(stderr,("Can not open file %s\n"), argv[2]);
 		getch();
 		exit(1);
 	};
-	if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )
-	//if( (outstream = _wfsopen( argv[3], _T("w"), _SH_DENYNO)) == NULL )
-	//if( _wfopen_s( &outstream, argv[3], _T("wb") ) != 0 )
+	/*if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )*/
+	if( (outstream = _fsopen( argv[3], ("w+b"), _SH_DENYNO)) == NULL )
 	{
-		fwprintf(stderr,_T("Can not open file %s\n"), argv[3]);
+		/*fwprintf(stderr,_T("Can not open file %s\n"), argv[3]);*/
+		fprintf(stderr,("Can not open file %s\n"), argv[3]);
 		getch();
 		exit(1);
 	}

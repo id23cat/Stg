@@ -37,6 +37,8 @@ public:
 	StegoEncoder(void);
 	~StegoEncoder(void);
 	void SetMessage(BYTE *mes, size_t len) throw(...);
+	//void SetMessageFile(wchar_t *mesFile) throw(...);
+	void SetMessageFile(char *mesFile) throw(...);
 	bool IsPasteMessage(){return paste_message;};
 	bool IsPasteLength(){return paste_length;};
 };
