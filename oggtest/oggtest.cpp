@@ -12,14 +12,16 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	FILE *instream, *outstream, *mes;
 	//if( (instream = _wfsopen( argv[2], _T("r+"), _SH_DENYNO)) == NULL )
-	if( (instream = _wfsopen( argv[2], _T("r"), _SH_DENYNO)) == NULL )
+	if( (instream = _wfsopen( argv[2], _T("r+b"), _SH_DENYNO)) == NULL )
+	//if( _wfopen_s( &instream, argv[2], _T("rb") ) != 0 )
 	{
 		fwprintf(stderr,_T("Can not open file %s\n"), argv[2]);
 		getch();
 		exit(1);
 	};
-	//if( (outstream = _wfsopen( argv[3], _T("r+"), _SH_DENYNO)) == NULL )
-	if( (outstream = _wfsopen( argv[3], _T("w"), _SH_DENYNO)) == NULL )
+	if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )
+	//if( (outstream = _wfsopen( argv[3], _T("w"), _SH_DENYNO)) == NULL )
+	//if( _wfopen_s( &outstream, argv[3], _T("wb") ) != 0 )
 	{
 		fwprintf(stderr,_T("Can not open file %s\n"), argv[3]);
 		getch();
@@ -28,7 +30,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	OggStegoEncoder enc;
 	try{
-		enc.Encode(instream,outstream,1);
+		enc.ReEncode(instream,outstream,1);
 	}catch(Exception exc){
 		cout << exc.getMessage();
 	}

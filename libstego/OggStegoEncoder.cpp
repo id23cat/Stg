@@ -374,7 +374,7 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 
 			*********************************************************************/
 
-			ret=vorbis_encode_init_vbr(&vie,2,44100,0.5);
+			ret=vorbis_encode_init_vbr(&vie,2,44100,0.4);
 			/* do not continue if setup failed; this can happen if we ask for a
 			mode that libVorbis does not support (eg, too low a bitrate, etc,
 			will return 'OV_EIMPL') */

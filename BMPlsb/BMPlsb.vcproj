@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="libstego.lib libbmp.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\Work\Stego-project\libs&quot;;C:\Work\libs"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;;C:\Work\libs"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
