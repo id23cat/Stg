@@ -8,16 +8,18 @@
 
 /* Note that this is POSIX, not ANSI, code */
 
-void OggStegoEncoder::InitVorbisStego(vorbis_block *vb)
+void OggStegoEncoder::InitVorbisStego(vorbis_block *vb, bool encMes)
 {
-	if(paste_length)										//
+	if(encMes && paste_length)										//
 	{																	//
 		vb->sData.CallbackFunction = &StegoHideLength;						//
 		vb->sData.isStego = 1;											//
-	}else if(paste_message)									//
+		cout << "\nEnc Len\n";
+	}else if(encMes && paste_message)									//
 	{																	//
 		vb->sData.CallbackFunction = &StegoHideMessage;					//
 		vb->sData.isStego = 1;											//
+		cout << "\nEnc Mes\n";
 	}else																//
 		vb->sData.isStego = 0;											//
 	vb->sData.stegoObjPtr = (void*) this;
@@ -45,12 +47,14 @@ void OggStegoEncoder::StegoHideLength(void *vb, float *vector, int len)
 			if(vector[i]==1 || vector[i]==2)
 			{
 				BYTE bit = pOSE->lit;
+		cout << int(bit);
 				vector[i] = (float)1+bit;
 				pOSE->lit++;
 				break;
 			}else if(vector[i]==-1 || vector[i]==-2)
 			{
 				BYTE bit = pOSE->lit;
+		cout << int(bit);
 				vector[i] =(float) -(1+bit);
 				pOSE->lit++;
 				break;
@@ -60,6 +64,7 @@ void OggStegoEncoder::StegoHideLength(void *vb, float *vector, int len)
 	{
 		pOCD->CallbackFunction = &StegoHideMessage;
 		pOSE->paste_length = false;
+		cout << "\nEnc Mes\n";
 	}
 }
 
@@ -77,12 +82,14 @@ void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 			if(vector[i]==1 || vector[i]==2)
 			{
 				BYTE bit = pOSE->mit;
+		cout << int(bit);
 				vector[i] = (float)1+bit;
 				pOSE->mit++;
 				break;
 			}else if(vector[i]==-1 || vector[i]==-2)
 			{
 				BYTE bit = pOSE->mit;
+		cout << int(bit);
 				vector[i] = (float)-(1+bit);
 				pOSE->mit++;
 				break;
@@ -90,7 +97,7 @@ void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 		}
 	}catch(Exception exc)
 	{
-		pOCD->notStego = 1;
+		pOCD->isStego = 0;
 	}
 }
 
@@ -364,19 +371,10 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 									   multiple vorbis_block structures
 									   for vd here */
 			/*****************************************************************/
+			/*****************************************************************/
 			/*!!!!!!!!! set callback function !!!!!!!!!!*/ //
-			InitVorbisStego(&vbe);
-			//if(encMes && paste_length) //
-			//{ //
-			//	vbe.sData.CallbackFunction = &(StegoHideLength); //
-			//	vbe.sData.isStego = 1; //
-			//}else if(encMes && paste_message) //
-			//{ //
-			//	vbe.sData.CallbackFunction = &(StegoHideMessage); //
-			//	vbe.sData.isStego = 1; //
-			//}else //
-			//	vbe.sData.isStego = 0; //
-			//vbe.sData.stegoObjPtr = (void*) this; //
+			InitVorbisStego(&vbe,encMes);
+			/*****************************************************************/
 			/*****************************************************************/
 
 			/* The rest is just a straight decode loop until end of stream */
@@ -683,20 +681,10 @@ size_t OggStegoEncoder::Encode(FILE *instream, FILE *outstream, bool encMes)
 	vorbis_block_init(&vd,&vb);
 
 	/*****************************************************************/
+	/*****************************************************************/
 	/*!!!!!!!!! set callback function !!!!!!!!!!*/					//
-	InitVorbisStego(&vb);
-	//if(encMes && paste_length)										//
-	//{																	//
-	// vb.sData.CallbackFunction = &StegoHideLength;						//
-	//vb.sData.isStego = 1;											//
-	//}else if(encMes && paste_message)									//
-	//{																	//
-	//vb.sData.CallbackFunction = &StegoHideMessage;					//
-	//vb.sData.isStego = 1;											//
-	//}else																//
-	//vb.sData.isStego = 0;											//
-	//vb.sData.stegoObjPtr = (void*) this;									//
-	//
+	InitVorbisStego(&vb,encMes);
+	/*****************************************************************/
 	/*****************************************************************/
 
 

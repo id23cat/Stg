@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include <iostream>
+using namespace std;
 
 // extern "C"
 // {
@@ -25,7 +27,7 @@
 #pragma  once
 typedef struct OPointerStruct
 {
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
+	int isStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
 	void (*CallbackFunction)(void *vb, float *vector, int len);	//Stego function
 	void *stegoObjPtr;						//pointer to the stego ooject
 }OggCallbackData;

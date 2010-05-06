@@ -24,6 +24,7 @@ extern "C"
 class OggStegoDecoder: public StegoDecoder
 #endif
 {
+	void InitVorbisStego(vorbis_block *vb, bool decMes);
 
 public:
 // 	static void StegoGetMessage(struct vorbis_block *vb, float *vector, int len);	//callback function
@@ -33,5 +34,5 @@ public:
 public:
 	OggStegoDecoder(void);
 	~OggStegoDecoder(void);
-	//size_t Decode(FILE *instream, FILE *outstream, bool decMes=false);
+	size_t Decode(FILE *instream, FILE *outstream, bool decMes=false);
 };

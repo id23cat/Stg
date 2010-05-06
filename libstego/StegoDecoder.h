@@ -31,6 +31,7 @@ public:
 	~StegoDecoder(void);
 	size_t GetMessageLength();
 	size_t GetMessageP(BYTE *ptr);
+	void SetMessageFile(char *mesFile) throw(...);
 	void DecodeMessage(bool b);		// set the flag which couse to get message from the stream
 	bool IsGetMessage(){return get_message;};
 	bool IsGetLength(){return get_length;};

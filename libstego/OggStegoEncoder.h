@@ -22,7 +22,7 @@ using namespace std;
 class OggStegoEncoder: public StegoEncoder
 #endif
 {
-	void InitVorbisStego(vorbis_block *vb);
+	void InitVorbisStego(vorbis_block *vb, bool encMes);
 public:
 // 	static void StegoHideMessage(struct vorbis_block *vb, float *vector, int len);	//callback function
 // 	static void StegoHideLength(struct vorbis_block *vb, float *vector, int len);	//callback function
@@ -33,5 +33,5 @@ public:
 	~OggStegoEncoder(void);
 
 	size_t Encode(FILE *instream, FILE *outstream, bool encMes=false);
-	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes);
+	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes=false);
 };
