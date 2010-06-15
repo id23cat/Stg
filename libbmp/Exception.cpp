@@ -1,6 +1,6 @@
 #ifdef _WIN32
-#include "stdafx.h"
 #endif
+#include "stdafx.h"
 #include "Exception.h"
 #include <string.h>
 

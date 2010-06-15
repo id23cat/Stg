@@ -1,7 +1,8 @@
 #ifdef _WIN32
-#include "stdafx.h"
 #endif
+#include "stdafx.h"
 #include <stdio.h>
+#include <string.h>
 
 #include "LibInclude.h"
 #include "StegoEncoder.h"
@@ -21,11 +22,13 @@ StegoEncoder::~StegoEncoder(void)
 
 void StegoEncoder::SetMessage(BYTE *mes, size_t len)  throw(...)
 {
-	mesArray.SetArray(mes, len);
+	//mesArray.SetArray(mes, len);
+	mesArray.AddArray(mes, len);
 	mit = mesArray.Begin();
 	paste_message = true;
 
-	lenArray.SetArray((BYTE*)&len, sizeof(size_t));
+	//lenArray.SetArray((BYTE*)&len, sizeof(size_t));
+	lenArray.AddArray((BYTE*)&len, sizeof(size_t));
 	size_t l;
 	lenArray.GetArray((BYTE*)&l);
 	lit = lenArray.Begin();
@@ -74,4 +77,16 @@ void StegoEncoder::SetMessageFile(char *mesFile) throw(...)
 	fclose(instream);
 	SetMessage(mes,len);
 	delete mes;
+}
+
+void StegoEncoder::SetInFile(char *inf)
+{
+	size_t len = strlen(inf)+1;
+	memcpy(infile,inf,len);
+
+}
+void StegoEncoder::SetOutFile(char *outf)
+{
+	size_t len = strlen(outf)+1;
+	memcpy(outfile,outf,len);
 }

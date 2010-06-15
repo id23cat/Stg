@@ -32,6 +32,7 @@ public:
 	OggStegoEncoder(void);
 	~OggStegoEncoder(void);
 
+	int Encode(bool pasteMes=false){return 1;};
 	size_t Encode(FILE *instream, FILE *outstream, bool encMes=false);
 	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes=false);
 };

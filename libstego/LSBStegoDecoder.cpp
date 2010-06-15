@@ -33,7 +33,8 @@ void LSBStegoDecoder::StegoGet(void *vb, BYTE *vector, int len)
 	{
 		size_t len;
 		lenArray.GetArray((BYTE*)&len);
-		mesArray.SetArray(NULL, len);
+		//mesArray.SetArray(NULL, len);
+		mesArray.AddArray(NULL, len);
 		mit = mesArray.Begin();
 	}
 	try

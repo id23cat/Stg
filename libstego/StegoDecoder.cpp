@@ -1,6 +1,6 @@
 #ifdef _WIN32
-#include "stdafx.h"
 #endif
+#include "stdafx.h"
 #include "StegoDecoder.h"
 
 StegoDecoder::StegoDecoder()
@@ -9,7 +9,8 @@ StegoDecoder::StegoDecoder()
 	get_length = true;
 	mes_len = 0;
 	we=1;
-	lenArray.SetArray(NULL, sizeof(size_t));
+	//lenArray.SetArray(NULL, sizeof(size_t));
+	lenArray.AddArray(NULL, sizeof(size_t));
 	lit = lenArray.Begin();
 	mit = mesArray.Begin();
 }
@@ -49,7 +50,8 @@ void StegoDecoder::DecodeMessage(bool b)
 {
 	if(b)
 	{
-		lenArray.SetArray(NULL, sizeof(size_t));
+		//lenArray.SetArray(NULL, sizeof(size_t));
+		lenArray.AddArray(NULL, sizeof(size_t));
 		lit = lenArray.Begin();
 	}
 	get_message = b;

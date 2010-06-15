@@ -34,6 +34,7 @@ public:
 	//JpegStegoEncoder(size_t dctS2);
 	~JpegStegoEncoder(void);
 public:
+	int Encode(bool pasteMes=false){return 1;};
 	int startHiding(char *inf, char *outf);
 	int startJpegToJpeg(char *inf, char *outf);
 	int startBmpToJpeg(char *inf, char *outf);

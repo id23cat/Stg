@@ -1,6 +1,7 @@
 #ifdef _WIN32
-#include "StdAfx.h"
+
 #endif
+#include "StdAfx.h"
 #include "OggStegoDecoder.h"
 //#include "LibInclude.h"
 
@@ -98,7 +99,8 @@ void OggStegoDecoder::StegoGetLength(void *vb, float *vector, int len)
 		pOCD->CallbackFunction = &StegoGetMessage;
 		size_t len;
 		pOSD->lenArray.GetArray((BYTE*)&len);
-		pOSD->mesArray.SetArray(NULL, len);
+		//pOSD->mesArray.SetArray(NULL, len);
+		pOSD->mesArray.AddArray(NULL, len);
 		pOSD->mit = pOSD->mesArray.Begin();
 		pOSD->get_length = false;
 	}

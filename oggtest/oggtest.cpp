@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
 		cout << "encoding...";
 		enc.SetMessageFile(argv[4]);
 		//enc.SetMessage(mes,3);
-		enc.ReEncode(instream,outstream,1);
+		enc.Encode(instream,outstream,1);
+		/*enc.ReEncode(*/
 		cout << " finished\n" << "decoding...";
 		fclose(instream);
 		fclose(outstream);

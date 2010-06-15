@@ -9,10 +9,12 @@
 #include<iostream>
 using namespace std;
 
+#include "StegoArray.h"
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	try{
+	/*try{
 	LSBStegoDecoder de;
 	LSBStegoEncoder en;
 	BMPimage bmp;
@@ -31,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout <<(int) stg[i]<<' ';
 	cout << endl;
 	en.SetMessage(stg,4);
-	en.StegoHide(0,ar,64);
+	en.StegoHide(ar,64);
 	de.StegoGet(0,ar,64);
 	de.GetMessageP(stg);
 	for(int i=0;i<4;i++)
@@ -41,7 +43,40 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		cout << exc.getMessage();
 	}
-	getch();
+	getch();*/
+
+	StegoArray sar1;
+	sar1.SetMessage((BYTE*)"asdf",4);
+	StegoArray sar2;
+
+	StegoArray::StegoArrayIterator it1=sar1.Begin();
+	StegoArray::StegoArrayIterator it2=sar2.Begin();
+
+	BYTE b=0;
+	try{
+	for(size_t i=0; i<sar1.ArrayBitLength(); i++)
+	{
+		b=it1;
+		it2=b;
+		cerr<<" ";
+		it1++; it2++;
+	}
+
+	BYTE *str;
+	size_t len;
+	str = sar2.GetMessage(len);
+	system("pause");
+	}catch(Exception ex)
+	{
+		cout << ex.getMessage();
+	}
+	catch(int)
+	{
+		cout << "fail";
+	};
+	
+
+
 	return 0;
 }
 

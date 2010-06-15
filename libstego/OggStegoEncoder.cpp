@@ -1,6 +1,7 @@
 #ifdef _WIN32
-#include "stdafx.h"
+
 #endif
+#include "stdafx.h"
 #include "OggStegoEncoder.h"
 
 /* takes a stereo 16bit 44.1kHz WAV file from stdin and encodes it into

@@ -33,14 +33,20 @@ protected:
 	BitArray::BitArrayIterator lit;
 	bool paste_message;
 	bool paste_length;
+	char *infile;
+	char *outfile;
 public:
 	StegoEncoder(void);
 	~StegoEncoder(void);
 	void SetMessage(BYTE *mes, size_t len) throw(...);
 	//void SetMessageFile(wchar_t *mesFile) throw(...);
 	void SetMessageFile(char *mesFile) throw(...);
-	bool IsPasteMessage(){return paste_message;};
-	bool IsPasteLength(){return paste_length;};
+	bool IsPasteMessage(){return paste_message;};			
+	bool IsPasteLength(){return paste_length;};				
+	void SetInFile(char *inf);							// set source media file for stego
+	void SetOutFile(char *outf);						// set destination media file for stego
+public:
+	virtual int Encode(bool pasteMes=false)=0;
 };
 
 #endif /* STEGOENCODER_H_ */

@@ -9,15 +9,11 @@ LSBStegoEncoder::~LSBStegoEncoder(void)
 {
 }
 
-void LSBStegoEncoder::StegoHideMessage(void *vb, BYTE *vector, int len)
-{
-}
+//void LSBStegoEncoder::StegoHideMessage(void *vb, BYTE *vector, int len)
+//{
+//}
 
-void LSBStegoEncoder::StegoHideLength(void *vb, BYTE *vector, int len)
-{
-}
-
-void LSBStegoEncoder::StegoHide(void *vb, BYTE *vector, int len)
+void LSBStegoEncoder::StegoHideLength(BYTE *data, int len)
 {
 	int i;
 	BYTE bit=0;
@@ -28,9 +24,9 @@ void LSBStegoEncoder::StegoHide(void *vb, BYTE *vector, int len)
 		for(i=0;i<len;i++)
 		{
 			bit = lit;
-			temp=vector[i]>>1;
+			temp=data[i]>>1;
 			temp=temp<<1;
-			vector[i]=temp|bit;
+			data[i]=temp|bit;
 			lit++;
 		}
 	}catch(Exception exc)
@@ -43,9 +39,9 @@ void LSBStegoEncoder::StegoHide(void *vb, BYTE *vector, int len)
 		for(i;i<len;i++)
 		{
 			bit = mit;
-			temp=vector[i]>>1;
+			temp=data[i]>>1;
 			temp=temp<<1;
-			vector[i]=temp|bit;
+			data[i]=temp|bit;
 			mit++;
 		}
 	}catch(Exception exc)
@@ -53,5 +49,21 @@ void LSBStegoEncoder::StegoHide(void *vb, BYTE *vector, int len)
 		/*pOCD->CallbackFunction = &StegoHideMessage;
 		pOSE->paste_length = false;*/
 	}
+}
 
+void LSBStegoEncoder::StegoHide(BYTE *data, int len)
+{
+
+	//if(lit
+
+}
+
+int LSBStegoEncoder::Encode(bool pasteMes)
+{
+	//if(
+	if(pasteMes)
+	{
+		bmpSrc.ReadRGB(infile);
+	}
+	return 0;
 }

@@ -85,7 +85,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -106,8 +106,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
+				Optimization="3"
+				EnableIntrinsicFunctions="false"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\jpeg-8a\&quot;;&quot;$(SolutionDir)\libbmp\&quot;;&quot;$(SolutionDir)\libogg\include\ogg&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBOGGSTEGO_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -125,19 +126,13 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				LinkIncremental="1"
-				GenerateDebugInformation="true"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
+				OutputFile="$(SolutionDir)\libs\$(ProjectName).lib"
+				AdditionalLibraryDirectories="$(SolutionDir)\libs"
+				IgnoreAllDefaultLibraries="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -147,9 +142,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -172,6 +164,14 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath=".\AP_CRC16.CPP"
+				>
+			</File>
+			<File
+				RelativePath=".\AP_CRC32.CPP"
+				>
+			</File>
 			<File
 				RelativePath=".\Array.cpp"
 				>
@@ -233,6 +233,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\StegoArray.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StegoDecoder.cpp"
 				>
 			</File>
@@ -246,6 +250,18 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\AP_CRC16.H"
+				>
+			</File>
+			<File
+				RelativePath=".\AP_CRC32.H"
+				>
+			</File>
+			<File
+				RelativePath=".\AP_Definition.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Array.h"
 				>
@@ -295,6 +311,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\StegoArray.h"
+				>
+			</File>
+			<File
 				RelativePath=".\StegoDecoder.h"
 				>
 			</File>
@@ -313,6 +333,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
