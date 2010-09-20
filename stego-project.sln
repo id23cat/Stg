@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpegtran", "jpeg-8a\jpegtra
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oggtest", "oggtest\oggtest.vcproj", "{A430A2F5-19CA-415C-8C93-3DFA43D2A1AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg_static", "libogg\win32\VS2008\libogg_static.vcproj", "{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg", "libogg\win32\VS2008\libogg_static.vcproj", "{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,8 +75,8 @@ Global
 		{9D58705E-FE3F-4221-8179-C90BD1B08C6A}.Release_SSE2|Win32.Build.0 = Release|Win32
 		{9D58705E-FE3F-4221-8179-C90BD1B08C6A}.Release|Win32.ActiveCfg = Release|Win32
 		{9D58705E-FE3F-4221-8179-C90BD1B08C6A}.Release|Win32.Build.0 = Release|Win32
-		{813C33AF-9031-49D2-BA19-93D600CDD404}.Debug|Win32.ActiveCfg = Release|Win32
-		{813C33AF-9031-49D2-BA19-93D600CDD404}.Debug|Win32.Build.0 = Release|Win32
+		{813C33AF-9031-49D2-BA19-93D600CDD404}.Debug|Win32.ActiveCfg = Debug|Win32
+		{813C33AF-9031-49D2-BA19-93D600CDD404}.Debug|Win32.Build.0 = Debug|Win32
 		{813C33AF-9031-49D2-BA19-93D600CDD404}.Release_SSE|Win32.ActiveCfg = Release|Win32
 		{813C33AF-9031-49D2-BA19-93D600CDD404}.Release_SSE|Win32.Build.0 = Release|Win32
 		{813C33AF-9031-49D2-BA19-93D600CDD404}.Release_SSE2|Win32.ActiveCfg = Release|Win32
