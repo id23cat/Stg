@@ -2,34 +2,47 @@
 #include "JpegStegoEncoder.h"
 
 extern "C" {
-	#include "..\jpeg-8a\jpegtran.h"
+	
 }
 
 
 JpegStegoEncoder::JpegStegoEncoder(void)
 {
-	//jEdata.CallbackFunction = &(this->StegoHideLength);
-	//jEdata.notStego = 0;
-	//jEdata.stegoObjPtr = this;
-
-	////jDdata.CallbackFunction = &(this->CountLength);
-	//jDdata.notStego = 0;
-	//jDdata.stegoObjPtr = this;
-	cData.CallbackFunction = &(this->StegoHideLength);
-	cData.notStego = 0;
-	cData.stegoObjPtr = this;
-
-	//dData.CallbackFunction = &(this->CountLength);
-	dData.notStego = 0;
-	dData.stegoObjPtr = this;
+///********************************************************/
+//	//cData.CallbackFunction = &(this->StegoHideLength);
+//	cData.CallbackFunction = &(this->StegoHideMessage);
+//	cData.isStego = 0;
+//	cData.stegoObjPtr = this;
+//
+//	/*dData.CallbackFunction = NULL;
+//	dData.notStego = 1;
+//	dData.stegoObjPtr = this;*/
+///********************************************************/
 }
-//JpegStegoEncoder::JpegStegoEncoder(size_t dctS2)
-//{
-//	DCTSIZE2 = dctS2;
-//}
 
 JpegStegoEncoder::~JpegStegoEncoder(void)
 {
+}
+
+void JpegStegoEncoder::InitJpegStego(bool encMes)
+{
+	if(encMes && paste_message)
+	{							
+		sData.CallbackFunction = &/*(this->*/StegoHideMessage;
+		sData.isStego = 1;
+	}else if(!encMes)													//
+	{
+		sData.CallbackFunction = &StegoTestContainer;
+		sData.isStego = 1;
+	}else
+		sData.isStego = 0;
+
+	sData.stegoObjPtr = this;
+
+	/*dData.CallbackFunction = NULL;
+	dData.notStego = 1;
+	dData.stegoObjPtr = this;*/
+
 }
 
 int JpegStegoEncoder::selectPosition(JCOEF *coef)
@@ -66,49 +79,89 @@ int JpegStegoEncoder::selectSign(JCOEF *coef, int position)
 	return 1;
 }
 
-bool JpegStegoEncoder::readBMP(char *fname)
+//bool JpegStegoEncoder::readBMP(char *fname)
+//{
+//	BMPimage bmpImg;
+//	bmpImg.ReadRGB(fname);
+//	rgb = bmpImg.GetRGBptr(height,width);
+//	return true;
+//}
+
+
+//void JpegStegoEncoder::StegoHideMessage(j_compress_ptr cinfo, JBLOCKROW *MCU_data)
+//{
+//	//JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData/*.stegoObjPtr*/);
+//	//JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);
+//	//StegoCData *pJCD = static_cast<StegoCData*>(cinfo->stegoEncoderData/*.stegoObjPtr*/);
+//	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(cinfo->stegoEncoderData.stegoObjPtr);
+//	if(!pJSE->paste_message || !pJSE->mesArray.IsArraySet())
+//		return;
+//	try
+//	{
+//		int DCT_pos;
+//		jpeg_component_info *compptr;
+//
+//		for (int blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++)
+//		{
+//			compptr = cinfo->cur_comp_info[cinfo->MCU_membership[blkn]];
+//			if(pJSE->paste_message)
+//			{
+//				DCT_pos = pJSE->selectPosition(MCU_data[blkn][0]);
+//				if(DCT_pos != -1)
+//					MCU_data[blkn][0][DCT_pos] = pJSE->mit *				//set bit with sign
+//												pJSE->selectSign(MCU_data[blkn][0],DCT_pos);	//
+//			}
+//			pJSE->mit++;
+//		}
+//
+//	}catch(OutOfRangeException oorExc)
+//	{
+//		//cerr<<oorExc.getMessage();
+//		pJSE->cData.isStego = 0;
+//	}
+//	catch(Exception exc)
+//	{
+//		cerr << exc.getMessage();
+//		//pOCD->isStego = 0;
+//	}
+//}
+//
+//
+//
+//void JpegStegoEncoder::StegoTestContainer(j_compress_ptr cinfo, JBLOCKROW *MCU_data)
+//{
+//	/*JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData.stegoObjPtr);
+//	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);*/
+//	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(cinfo->stegoEncoderData.stegoObjPtr);
+//	
+//	try
+//	{
+//		int DCT_pos;
+//		jpeg_component_info *compptr;
+//
+//		for (int blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++)
+//		{
+//			compptr = cinfo->cur_comp_info[cinfo->MCU_membership[blkn]];
+//			DCT_pos = pJSE->selectPosition(MCU_data[blkn][0]);
+//			if(DCT_pos != -1)
+//				pJSE->capacityBit++;			
+//		}
+//	}catch(Exception exc)
+//	{
+//		pJSE->cData.isStego = 0;
+//	}
+//}
+
+void JpegStegoEncoder::StegoHideMessage(void *cinfo, JBLOCKROW *MCU_data)
 {
-	BMPimage bmpImg;
-	bmpImg.ReadRGB(fname);
-	rgb = bmpImg.GetRGBptr(height,width);
-	return true;
-}
-
-void JpegStegoEncoder::StegoHideLength(j_compress_ptr cinfo, JBLOCKROW *MCU_data)
-{
-	JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData.stegoObjPtr);
-	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);
-	if(!pJSE->paste_length || !pJSE->lenArray.IsArraySet())
-		return;
-	try
-	{
-		int DCT_pos;
-		jpeg_component_info *compptr;
-
-		for (int blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++)
-		{
-			compptr = cinfo->cur_comp_info[cinfo->MCU_membership[blkn]];
-			if(pJSE->paste_message)
-			{
-				DCT_pos = pJSE->selectPosition(MCU_data[blkn][0]);
-				if(DCT_pos != -1)
-					MCU_data[blkn][0][DCT_pos] = pJSE->lit *				//set bit with sign
-												pJSE->selectSign(MCU_data[blkn][0],DCT_pos);	//
-			}
-			pJSE->lit++;
-		}
-
-	}catch(Exception exc)
-	{
-		pJCD->CallbackFunction = &StegoHideMessage;
-		pJSE->paste_length = false;
-	}
-}
-
-void JpegStegoEncoder::StegoHideMessage(j_compress_ptr cinfo, JBLOCKROW *MCU_data)
-{
-	JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData.stegoObjPtr);
-	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);
+	//JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData/*.stegoObjPtr*/);
+	//JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);
+	//StegoCData *pJCD = static_cast<StegoCData*>(cinfo->stegoEncoderData/*.stegoObjPtr*/);
+	j_compress_ptr *ccinfop = static_cast<j_compress_ptr*>(cinfo);
+	j_compress_ptr ccinfo = *ccinfop;
+	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(ccinfo->stego.stegoObjPtr);
+	
+	BYTE bit;
 	if(!pJSE->paste_message || !pJSE->mesArray.IsArraySet())
 		return;
 	try
@@ -116,43 +169,156 @@ void JpegStegoEncoder::StegoHideMessage(j_compress_ptr cinfo, JBLOCKROW *MCU_dat
 		int DCT_pos;
 		jpeg_component_info *compptr;
 
-		for (int blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++)
+		for (int blkn = 0; blkn < ccinfo->blocks_in_MCU; blkn++)
 		{
-			compptr = cinfo->cur_comp_info[cinfo->MCU_membership[blkn]];
+			compptr = ccinfo->cur_comp_info[ccinfo->MCU_membership[blkn]];
 			if(pJSE->paste_message)
 			{
 				DCT_pos = pJSE->selectPosition(MCU_data[blkn][0]);
 				if(DCT_pos != -1)
-					MCU_data[blkn][0][DCT_pos] = pJSE->mit *				//set bit with sign
-												pJSE->selectSign(MCU_data[blkn][0],DCT_pos);	//
+				{
+					bit = pJSE->mit;
+					//cerr << (int)bit;
+					MCU_data[blkn][0][DCT_pos] = bit *				//set bit with sign
+					pJSE->selectSign(MCU_data[blkn][0],DCT_pos);	//
+					pJSE->mit++;
+				}
 			}
-			pJSE->mit++;
+			
 		}
 
-	}catch(Exception exc)
+	}catch(OutOfRangeException oorExc)
 	{
-		pJCD->notStego = 1;
+		//cerr<<oorExc.getMessage();
+		ccinfo->stego.isStego=0;
+		//pJSE->sData.isStego = 0;
+	}
+	catch(Exception exc)
+	{
+		cerr << exc.getMessage();
+		//pOCD->isStego = 0;
 	}
 }
 
-void JpegStegoEncoder::CountLength(j_compress_ptr cinfo, JBLOCKROW *MCU_data)
+
+
+void JpegStegoEncoder::StegoTestContainer(void *cinfo, JBLOCKROW *MCU_data)
 {
+	/*JpegECallbackData *pJCD = static_cast<JpegECallbackData*>(cinfo->stegoEncoderData.stegoObjPtr);
+	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(pJCD->stegoObjPtr);*/
+	j_compress_ptr *ccinfop = static_cast<j_compress_ptr*>(cinfo);
+	j_compress_ptr ccinfo = *ccinfop;
+	JpegStegoEncoder *pJSE = static_cast<JpegStegoEncoder*>(ccinfo->stego.stegoObjPtr);
+
+	try
+	{
+		int DCT_pos;
+		jpeg_component_info *compptr;
+
+		for (int blkn = 0; blkn < ccinfo->blocks_in_MCU; blkn++)
+		{
+			compptr = ccinfo->cur_comp_info[ccinfo->MCU_membership[blkn]];
+			DCT_pos = pJSE->selectPosition(MCU_data[blkn][0]);
+			if(DCT_pos != -1)
+				pJSE->capacityBit++;			
+		}
+	}catch(Exception exc)
+	{
+		pJSE->sData.isStego = 0;
+	}
 }
 
-int JpegStegoEncoder::startHiding(char *inf, char *outf)
+
+//int  JpegStegoEncoder::Encode(char **infiles, int count, char *dstdir, bool pasteMes)
+//{
+//	if(count <1)
+//		throw Exception("Must be one or more input files");
+//	char outfile[512];
+//	int len=0;
+//	for(int i=0; i<count; i++)
+//	{
+//		memset(outfile,0,512);
+//		genOutFileName(infiles[i],outfile,dstdir,i,count);
+//		len = strlen(outfile);
+//		outfile[len-3]='j';
+//		outfile[len-2]='p';
+//		outfile[len-1]='g';
+//		Encode(infiles[i], outfile, pasteMes);
+//	}	
+//}
+
+int JpegStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
 {
-	size_t len = strlen(inf);
-	char *ext = inf+(len-3);
+	// test for existing input and output files
+	FILE *fp;
+	if ((fp = fopen(infile, READ_BINARY)) == NULL) {
+		throw FileNotFoundException("File not found\n",infile);
+	}
+	fclose(fp);
+	if ((fp = fopen(outfile, WRITE_BINARY)) == NULL) {
+		throw FileNotFoundException("File not found\n",outfile);
+	}
+	fclose(fp);
+
+	InitJpegStego(true);
+	size_t len = strlen(infile);
+	char *ext = infile+(len-3);
 	char extl[4]={0};
 	for(int i=0;i<3;i++)
 		extl[i] = tolower(ext[i]);
 	if(!strcmp(extl,"bmp\0"))
-		startBmpToJpeg(inf,outf);
+		startBmpToJpeg(infile,outfile);
 	else if(!strcmp(extl,"jpg\0"))
-		startJpegToJpeg(inf,outf);
+		startJpegToJpeg(infile,outfile);
 	else
-		return -1;
+		throw Exception("Unsupported file type");
+	return 0;
 }
+
+size_t JpegStegoEncoder::Test(char *infile)
+{
+	// test for existing input file
+	FILE *fp;
+	if ((fp = fopen(infile, READ_BINARY)) == NULL) {
+		throw FileNotFoundException("File not found\n",infile);
+	}
+	fclose(fp);
+	if ((fp = fopen("nul", READ_BINARY)) == NULL) {
+		throw FileNotFoundException("File not found\n","\Device\Null");
+	}
+	fclose(fp);
+
+	InitJpegStego(false);
+	size_t len = strlen(infile);
+	char *ext = infile+(len-3);
+	char extl[4]={0};
+	for(int i=0;i<3;i++)
+		extl[i] = tolower(ext[i]);
+	if(!strcmp(extl,"bmp\0"))
+		startBmpToJpeg(infile,"nul");
+	else if(!strcmp(extl,"jpg\0"))
+		startJpegToJpeg(infile,"nul");
+	else
+		throw Exception("Unsupported file type");
+	if(capacityBit/8 <= BEG_LEN + LEN_LEN + CRC_LEN + END_LEN)
+		return 0;
+	return ((size_t) capacityBit/8) - BEG_LEN - LEN_LEN - CRC_LEN - END_LEN;
+}
+
+//int JpegStegoEncoder::startHiding(char *inf, char *outf)
+//{
+//	size_t len = strlen(inf);
+//	char *ext = inf+(len-3);
+//	char extl[4]={0};
+//	for(int i=0;i<3;i++)
+//		extl[i] = tolower(ext[i]);
+//	if(!strcmp(extl,"bmp\0"))
+//		startBmpToJpeg(inf,outf);
+//	else if(!strcmp(extl,"jpg\0"))
+//		startJpegToJpeg(inf,outf);
+//	else
+//		return -1;
+//}
 
 int JpegStegoEncoder::startJpegToJpeg(char *inf, char *outf)
 {
@@ -164,73 +330,82 @@ int JpegStegoEncoder::startJpegToJpeg(char *inf, char *outf)
 	argv[1]=inf;
 	argv[2]=outf;
 
-	return main_tran(argc, argv, cData, dData);
+	return main_tran(argc, argv, sData);
 }
 
 int JpegStegoEncoder::startBmpToJpeg(char *inf, char *outf)
 {
-	readBMP(inf);
-	struct jpeg_compress_struct cinfo;
-	struct jpeg_error_mgr jerr;
-	FILE* dst_jpeg;
-	JSAMPLE *image_buffer = (JSAMPLE*)rgb;
+	int argc = 3;
+	char *argv[3];
+	char name[]="cjpeg";
 
-	cinfo.err = jpeg_std_error(&jerr);
-	jpeg_create_compress(&cinfo);
+	argv[0]=name;
+	argv[1]=inf;
+	argv[2]=outf;
 
-	if (fopen_s(&dst_jpeg, outf, "wb")!=0)
-	{
-		Exception exc;
-		char strerr[STR_LEN];
-		sprintf_s(strerr, STR_LEN, "can't open %s\n", outf);
-		exc.setMessage(strerr);
-		throw exc;
-	}
-
-		jpeg_stdio_dest(&cinfo, dst_jpeg);
-		cinfo.image_width = width; 	/* image width and height, in pixels */
-		cinfo.image_height = height;
-		cinfo.input_components = 3;		/* # of color components per pixel */
-		cinfo.in_color_space = JCS_RGB; 	/* colorspace of input image */
-
-	JSAMPROW row_pointer[1];	/* pointer to JSAMPLE row[s] */
-	int row_stride;		/* physical row width in image buffer */
-
-	jpeg_set_defaults(&cinfo);
-	
-	jpeg_set_quality(&cinfo, 100, TRUE /* limit to baseline-JPEG values */);
-	jpeg_start_compress(&cinfo, TRUE);
-
-	row_stride = width * 3;	/* JSAMPLEs per row in image_buffer */
-
-/**************************************/
-	cinfo.stegoEncoderData = cData;
-/**************************************/
-		
-	while (cinfo.next_scanline < cinfo.image_height)
-	{
-		row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
-		(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
-	}
-	jpeg_finish_compress(&cinfo);
-
-	fclose(dst_jpeg);
+	return main_cjpeg(argc, argv, sData);
+//	readBMP(inf);
+//	struct jpeg_compress_struct cinfo;
+//	struct jpeg_error_mgr jerr;
+//	FILE* dst_jpeg;
+//	JSAMPLE *image_buffer = (JSAMPLE*)rgb;
+//
+//	cinfo.err = jpeg_std_error(&jerr);
+//	jpeg_create_compress(&cinfo);
+//
+//	if (fopen_s(&dst_jpeg, outf, "wb")!=0)
+//	{
+//		Exception exc;
+//		char strerr[STR_LEN];
+//		sprintf_s(strerr, STR_LEN, "can't open %s\n", outf);
+//		exc.setMessage(strerr);
+//		throw exc;
+//	}
+//
+//		jpeg_stdio_dest(&cinfo, dst_jpeg);
+//		cinfo.image_width = width; 	/* image width and height, in pixels */
+//		cinfo.image_height = height;
+//		cinfo.input_components = 3;		/* # of color components per pixel */
+//		cinfo.in_color_space = JCS_RGB; 	/* colorspace of input image */
+//
+//	JSAMPROW row_pointer[1];	/* pointer to JSAMPLE row[s] */
+//	int row_stride;		/* physical row width in image buffer */
+//
+//	jpeg_set_defaults(&cinfo);
+//	
+//	jpeg_set_quality(&cinfo, 100, TRUE /* limit to baseline-JPEG values */);
+//	jpeg_start_compress(&cinfo, TRUE);
+//
+//	row_stride = width * 3;	/* JSAMPLEs per row in image_buffer */
+//
+///**************************************/
+//	cinfo.stego = sData;
+///**************************************/
+//		
+//	while (cinfo.next_scanline < cinfo.image_height)
+//	{
+//		row_pointer[0] = & image_buffer[cinfo.next_scanline * row_stride];
+//		(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+//	}
+//	jpeg_finish_compress(&cinfo);
+//
+//	fclose(dst_jpeg);
 	return 1;
 }
 
-size_t JpegStegoEncoder::CountLength(char *inf)
-{
-	//struct jpeg_decompress_struct cinfo;
-	//struct jpeg_error_mgr jerr;
-
-	//cinfo.err = jpeg_std_error(&jerr);
-	//jpeg_create_compress(&cinfo);
-	//cinfo.stegoDecoderData.stegoObjPtr = (void*) this;
-	///*memset(stego_fname, 0, FNAME_LEN);
-	//stego_short_name=NULL;*/
-
-	return 1;
-}
+//size_t JpegStegoEncoder::CountLength(char *inf)
+//{
+//	//struct jpeg_decompress_struct cinfo;
+//	//struct jpeg_error_mgr jerr;
+//
+//	//cinfo.err = jpeg_std_error(&jerr);
+//	//jpeg_create_compress(&cinfo);
+//	//cinfo.stegoDecoderData.stegoObjPtr = (void*) this;
+//	///*memset(stego_fname, 0, FNAME_LEN);
+//	//stego_short_name=NULL;*/
+//
+//	return 1;
+//}
 
 //{
 //	char * outfilename;

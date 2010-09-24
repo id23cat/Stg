@@ -15,16 +15,16 @@ OggStegoDecoder::~OggStegoDecoder(void)
 
 void OggStegoDecoder::InitVorbisStego(vorbis_block *vb, bool decMes)
 {
-	if(decMes && get_length)											//
-	{																	//
-		vb->sData.CallbackFunction = &StegoGetLength;						//
-		vb->sData.isStego = 1;											//
-		cout << "\nDec Len\n";
-	}else if(decMes && get_message)									//
+	//if(decMes && get_length)											//
+	//{																	//
+	//	vb->sData.CallbackFunction = &StegoGetLength;						//
+	//	vb->sData.isStego = 1;											//
+	//	cout << "\nDec Len\n";
+	/*}else*/ if(decMes && get_message)									//
 	{																	//
 		vb->sData.CallbackFunction = &StegoGetMessage;						//
 		vb->sData.isStego = 1;											//
-		cout << "\nDec Mes\n";
+		//cout << "\nDec Mes\n";
 	}else																//
 		vb->sData.isStego = 0;											//
 	vb->sData.stegoObjPtr = (void*) this;									//
@@ -34,79 +34,146 @@ void OggStegoDecoder::StegoGetMessage(void *vb, float *vector, int len)
 {
 	OggCallbackData *pOCD = static_cast<OggCallbackData*>(vb);
 	OggStegoDecoder *pOSD = static_cast<OggStegoDecoder*>(pOCD->stegoObjPtr);
-	if(!pOSD->get_message || !pOSD->lenArray.IsArraySet())
+	if(!pOSD->get_message)// || !pOSD->lenArray.IsArraySet())
 		return;
-
 	try
 	{
-		for(int i=0; i<len; i++)
+		for(int i=1; i<len; i++)
 		{
+//			BYTE bit = abs((BYTE)vector[i])-1;
+//			if(bit==1 || bit==0)
+//			{
+//#ifdef _DEBUG
+//				cout << int(bit);
+//#endif
+//
+//				pOSD->mit = bit;
+//				pOSD->mit++;
+//				break;
+//			}
 			if(vector[i]==1 || vector[i]==2)
 			{
 				BYTE bit = (BYTE)vector[i]-1;
-		cout << int(bit);
+#ifdef _DEBUG
+		ticD++;
+		if(ticD>=LOWD && ticD<HIGD)
+			cout << int(bit);
+#endif
+
 				pOSD->mit = bit;
 				pOSD->mit++;
-				pOSD->mes_len++;
+				//pOSD->mes_len++;
 				break;
 			}else if(vector[i]==-1 || vector[i]==-2)
 			{
 				BYTE bit = (BYTE)(-vector[i])-1;
-		cout << int(bit);
+#ifdef _DEBUG
+		ticD++;
+		if(ticD>=LOWD && ticD<HIGD)
+			cout << int(bit);
+#endif
 				pOSD->mit = bit;
 				pOSD->mit++;
-				pOSD->mes_len++;
+				//pOSD->mes_len++;
 				break;
 			}
 		}
-	}catch(Exception exc)
+	}catch(EndOfMessageException exc)
 	{
+		cerr << exc.getMessage()<<endl;
 		pOCD->isStego = 0;
 		pOSD->get_message = false;
-	}
-}
-
-void OggStegoDecoder::StegoGetLength(void *vb, float *vector, int len)
-{
-	OggCallbackData *pOCD = static_cast<OggCallbackData*>(vb);
-	OggStegoDecoder *pOSD = static_cast<OggStegoDecoder*>(pOCD->stegoObjPtr);
-	if(!pOSD->get_length || !pOSD->lenArray.IsArraySet())
-		return;
-
-	try
+	}catch(DamagedMessageException exc)
 	{
-		for(int i=0; i<len; i++)
-		{
-			if(vector[i]==1 || vector[i]==2)
-			{
-				BYTE bit = (BYTE)vector[i]-1;
-		cout << int(bit);
-				pOSD->lit = bit;
-				pOSD->lit++;
-				break;
-			}else if(vector[i]==-1 || vector[i]==-2)
-			{
-				BYTE bit = (BYTE)(-vector[i])-1;
-		cout << int(bit);
-				pOSD->lit = bit;
-				pOSD->lit++;
-				break;
-			}
-		}
+		cerr << exc.getMessage()<<endl;
+		pOCD->isStego = 0;
+		pOSD->get_message = false;	
 	}catch(Exception exc)
-	{
-		cout << "\nDec Mes\n";
-		pOCD->CallbackFunction = &StegoGetMessage;
-		size_t len;
-		pOSD->lenArray.GetArray((BYTE*)&len);
-		//pOSD->mesArray.SetArray(NULL, len);
-		pOSD->mesArray.AddArray(NULL, len);
-		pOSD->mit = pOSD->mesArray.Begin();
-		pOSD->get_length = false;
+	{		
+		cerr << exc.getMessage()<<endl;		
 	}
 }
 
-size_t OggStegoDecoder::Decode(FILE *instream, FILE *outstream, bool decMes)
+//void OggStegoDecoder::StegoGetLength(void *vb, float *vector, int len)
+//{
+//	OggCallbackData *pOCD = static_cast<OggCallbackData*>(vb);
+//	OggStegoDecoder *pOSD = static_cast<OggStegoDecoder*>(pOCD->stegoObjPtr);
+//	if(!pOSD->get_length || !pOSD->lenArray.IsArraySet())
+//		return;
+//
+//	try
+//	{
+//		for(int i=0; i<len; i++)
+//		{
+//			if(vector[i]==1 || vector[i]==2)
+//			{
+//				BYTE bit = (BYTE)vector[i]-1;
+//		cout << int(bit);
+//				pOSD->lit = bit;
+//				pOSD->lit++;
+//				break;
+//			}else if(vector[i]==-1 || vector[i]==-2)
+//			{
+//				BYTE bit = (BYTE)(-vector[i])-1;
+//		cout << int(bit);
+//				pOSD->lit = bit;
+//				pOSD->lit++;
+//				break;
+//			}
+//		}
+//	}catch(Exception exc)
+//	{
+//		cout << "\nDec Mes\n";
+//		pOCD->CallbackFunction = &StegoGetMessage;
+//		size_t len;
+//		pOSD->lenArray.GetArray((BYTE*)&len);
+//		//pOSD->mesArray.SetArray(NULL, len);
+//		pOSD->mesArray.AddArray(NULL, len);
+//		pOSD->mit = pOSD->mesArray.Begin();
+//		pOSD->get_length = false;
+//	}
+//}
+
+int OggStegoDecoder::Decode(char *infile, char *outfile, bool getMes)
+{
+	size_t len = strlen(infile);
+	char *ext = infile+(len-3);
+	char extl[4]={0};
+	for(int i=0;i<3;i++)
+		extl[i] = tolower(ext[i]);
+	FILE *instream, *outstream;
+	if( (instream = _fsopen( infile, ("r+b"), _SH_DENYNO)) == NULL )
+	{
+		char buf[256];
+		sprintf(buf,("Can not open file %s\n"), infile);
+		throw Exception(buf);		
+	};
+	/*if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )*/
+	if(outfile)
+	{
+		if( (outstream = _fsopen( outfile, ("w+b"), _SH_DENYNO)) == NULL )
+		{
+			char buf[256];
+			sprintf(buf,("Can not open file %s\n"), outfile);
+			throw Exception(buf);		
+		}
+	}
+	else
+	{
+		if( (outstream = _fsopen( "nul", ("wb"), _SH_DENYNO)) == NULL )
+		{		
+			char buf[256];
+			sprintf(buf,("Can not open file %s\n"), "NULL:");
+			throw Exception(buf);
+		}
+	}
+	startDecodeOgg(instream,outstream,getMes);
+	fclose(instream);
+	fclose(outstream);
+	return 0;
+}
+
+size_t OggStegoDecoder::startDecodeOgg(FILE *instream, FILE *outstream, bool getMes)
 {
 	ogg_int16_t convbuffer[4096]; /* take 8k out of the data segment, not the stack */
 	int convsize=4096;
@@ -273,7 +340,8 @@ size_t OggStegoDecoder::Decode(FILE *instream, FILE *outstream, bool decMes)
 
 		/* Throw the comments plus a few lines about the bitstream we're
 		decoding */
-		{
+//!!!!!!!Info
+		/*{
 			char **ptr=vc.user_comments;
 			while(*ptr){
 				fprintf(stderr,"%s\n",*ptr);
@@ -281,7 +349,8 @@ size_t OggStegoDecoder::Decode(FILE *instream, FILE *outstream, bool decMes)
 			}
 			fprintf(stderr,"\nBitstream is %d channel, %ldHz\n",vi.channels,vi.rate);
 			fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
-		}
+		}*/
+//!!!!!!!!!
 
 		convsize=4096/vi.channels;
 
@@ -296,7 +365,7 @@ size_t OggStegoDecoder::Decode(FILE *instream, FILE *outstream, bool decMes)
 			/*****************************************************************/
 			/*****************************************************************/
 			/*!!!!!!!!! set callback function !!!!!!!!!!*/					//
-			InitVorbisStego(&vb,decMes);
+			InitVorbisStego(&vb,getMes);
 			/*****************************************************************/
 			/*****************************************************************/
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "BitArray.h"
+#include "StegoArray.h"
 #include "LibInclude.h"
 #include "stdio.h"
 
@@ -15,24 +15,28 @@
 //class LIBSTEGODLL StegoDecoder
 //#else
 class  StegoDecoder
+	//!OutOfRangeException = false;
 #endif
 {
 protected:
-	BitArray mesArray;
-	BitArray lenArray;
+	StegoArray mesArray;
+	//BitArray lenArray;
 	BitArray::BitArrayIterator mit;
-	BitArray::BitArrayIterator lit;
+	//BitArray::BitArrayIterator lit;
 	bool get_message;
-	bool get_length;
-	size_t mes_len;
+	//bool get_length;
+	//size_t mes_len;
 	int we;
 public:
 	StegoDecoder(void);
 	~StegoDecoder(void);
 	size_t GetMessageLength();
 	size_t GetMessageP(BYTE *ptr);
-	void SetMessageFile(char *mesFile) throw(...);
+	void SaveMessageToFile(char *mesFile) throw(...);
 	void DecodeMessage(bool b);		// set the flag which couse to get message from the stream
 	bool IsGetMessage(){return get_message;};
-	bool IsGetLength(){return get_length;};
+	//bool IsGetLength(){return get_length;};
+public:
+	//virtual int Decode(bool pasteMes=false)=0;
+	virtual int Decode(char *infile, char *outfile, bool getMes=false)=0;
 };

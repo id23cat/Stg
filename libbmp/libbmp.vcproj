@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;C:\Work\Stego-project\libstego&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -154,6 +155,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EasyBMP.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Exception.cpp"
 				>
 			</File>
@@ -185,6 +190,22 @@
 			>
 			<File
 				RelativePath=".\BMPimage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EasyBMP.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EasyBMP_BMP.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EasyBMP_DataStructures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EasyBMP_VariousBMPutilities.h"
 				>
 			</File>
 			<File

@@ -9,23 +9,6 @@
 
 /* Note that this is POSIX, not ANSI, code */
 
-void OggStegoEncoder::InitVorbisStego(vorbis_block *vb, bool encMes)
-{
-	if(encMes && paste_length)										//
-	{																	//
-		vb->sData.CallbackFunction = &StegoHideLength;						//
-		vb->sData.isStego = 1;											//
-		cout << "\nEnc Len\n";
-	}else if(encMes && paste_message)									//
-	{																	//
-		vb->sData.CallbackFunction = &StegoHideMessage;					//
-		vb->sData.isStego = 1;											//
-		cout << "\nEnc Mes\n";
-	}else																//
-		vb->sData.isStego = 0;											//
-	vb->sData.stegoObjPtr = (void*) this;
-}
-
 OggStegoEncoder::OggStegoEncoder(void)
 {
 }
@@ -34,40 +17,21 @@ OggStegoEncoder::~OggStegoEncoder(void)
 {
 }
 
-void OggStegoEncoder::StegoHideLength(void *vb, float *vector, int len)
+void OggStegoEncoder::InitVorbisStego(vorbis_block *vb, bool encMes)
 {
-	OggCallbackData *pOCD = static_cast<OggCallbackData*>(vb);
-	OggStegoEncoder *pOSE = static_cast<OggStegoEncoder*>(pOCD->stegoObjPtr);
-	if(!pOSE->paste_length || !pOSE->lenArray.IsArraySet())
-		return;
-
-	try
+	if(encMes && paste_message)
+	{																	//
+		vb->sData.CallbackFunction = &StegoHideMessage;					//
+		vb->sData.isStego = 1;											//		
+	}else if(!encMes)													//
 	{
-		for(int i=0; i<len; i++)
-		{
-			if(vector[i]==1 || vector[i]==2)
-			{
-				BYTE bit = pOSE->lit;
-		cout << int(bit);
-				vector[i] = (float)1+bit;
-				pOSE->lit++;
-				break;
-			}else if(vector[i]==-1 || vector[i]==-2)
-			{
-				BYTE bit = pOSE->lit;
-		cout << int(bit);
-				vector[i] =(float) -(1+bit);
-				pOSE->lit++;
-				break;
-			}
-		}
-	}catch(Exception exc)
-	{
-		pOCD->CallbackFunction = &StegoHideMessage;
-		pOSE->paste_length = false;
-		cout << "\nEnc Mes\n";
-	}
+		vb->sData.CallbackFunction = &StegoTestContainer;				//
+		vb->sData.isStego = 1;											//		
+	}else
+		vb->sData.isStego = 0;											//
+	vb->sData.stegoObjPtr = (void*) this;
 }
+
 
 void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 {
@@ -78,32 +42,147 @@ void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 
 	try
 	{
-		for(int i=0; i<len; i++)
+		for(int i=1; i<len; i++)
 		{
 			if(vector[i]==1 || vector[i]==2)
 			{
 				BYTE bit = pOSE->mit;
-		cout << int(bit);
+#ifdef _DEBUG
+		ticE++;
+		if(ticE>=LOWE && ticE<HIGE)
+			cout << int(bit);
+#endif
 				vector[i] = (float)1+bit;
 				pOSE->mit++;
 				break;
 			}else if(vector[i]==-1 || vector[i]==-2)
 			{
 				BYTE bit = pOSE->mit;
-		cout << int(bit);
+#ifdef _DEBUG
+		ticE++;
+		if(ticE>=LOWE && ticE<HIGE)
+			cout << int(bit);
+#endif
 				vector[i] = (float)-(1+bit);
 				pOSE->mit++;
 				break;
 			}
 		}
-	}catch(Exception exc)
+	}
+	catch(OutOfRangeException oorExc)
 	{
+		//cerr<<oorExc.getMessage();
+		pOCD->isStego = 0;
+	}
+	catch(Exception exc)
+	{
+		cerr << exc.getMessage();
+		//pOCD->isStego = 0;
+	}
+}
+
+void OggStegoEncoder::StegoTestContainer(void *vb, float *vector, int len)
+{
+	OggCallbackData *pOCD = static_cast<OggCallbackData*>(vb);
+	OggStegoEncoder *pOSE = static_cast<OggStegoEncoder*>(pOCD->stegoObjPtr);
+	
+	try
+	{
+		for(int i=1; i<len; i++)
+		{
+			if(vector[i]==1 || vector[i]==2)
+			{
+				pOSE->capacityBit++;
+				break;
+			}else if(vector[i]==-1 || vector[i]==-2)
+			{
+				pOSE->capacityBit++;
+				break;
+			}
+		}
+	}	
+	catch(Exception exc)
+	{
+		cerr<<exc.getMessage();
 		pOCD->isStego = 0;
 	}
 }
 
+int OggStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
+{
+	size_t len = strlen(infile);
+	char *ext = infile+(len-3);
+	char extl[4]={0};
+	for(int i=0;i<3;i++)
+		extl[i] = tolower(ext[i]);
+	FILE *instream, *outstream;
+	if( (instream = _fsopen( infile, ("r+b"), _SH_DENYNO)) == NULL )
+	{
+		char buf[256];
+		sprintf(buf,("Can not open file %s\n"), infile);
+		throw Exception(buf);		
+	};
+	/*if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )*/
+	if( (outstream = _fsopen( outfile, ("w+b"), _SH_DENYNO)) == NULL )
+	{
+		char buf[256];
+		sprintf(buf,("Can not open file %s\n"), outfile);
+		throw Exception(buf);		
+	}
+	if(!strcmp(extl,"wav\0"))
+	{
 
-size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
+		startWavToOgg(instream,outstream,pasteMes);
+	}
+	else if(!strcmp(extl,"ogg\0"))
+	{
+		startOggToOgg(instream,outstream,pasteMes);
+	}
+	else
+		return -1;
+	fclose(instream);
+	fclose(outstream);
+	return 0;
+}
+
+size_t OggStegoEncoder::Test(char *infile)
+{
+	size_t len = strlen(infile);
+	char *ext = infile+(len-3);
+	char extl[4]={0};
+	for(int i=0;i<3;i++)
+		extl[i] = tolower(ext[i]);
+	FILE *instream, *outstream;
+	if( (instream = _fsopen( infile, ("r+b"), _SH_DENYNO)) == NULL )
+	{
+		char buf[256];
+		sprintf(buf,("Can not open file %s\n"), infile);
+		throw Exception(buf);		
+	};
+	/*if( (outstream = _wfsopen( argv[3], _T("r+b"), _SH_DENYNO)) == NULL )*/
+	if( (outstream = _fsopen( "nul", ("wb"), _SH_DENYNO)) == NULL )
+	{		
+		char buf[256];
+		sprintf(buf,("Can not open file %s\n"), "NULL:");
+		throw Exception(buf);
+	}
+	if(!strcmp(extl,"wav\0"))
+	{
+
+		startWavToOgg(instream,outstream,false);
+	}
+	else if(!strcmp(extl,"ogg\0"))
+	{
+		startOggToOgg(instream,outstream,false);
+	}
+	else
+		return -1;
+	fclose(instream);
+	fclose(outstream);
+	return ((size_t) capacityBit/8) - BEG_LEN - LEN_LEN - CRC_LEN - END_LEN;
+}
+
+size_t OggStegoEncoder::startOggToOgg(FILE *instream, FILE *outstream, bool encMes)
 {
 	ogg_int16_t convbuffer[4096]; /* take 8k out of the data segment, not the stack */
 	signed char readbuffer[READ*4+44]; /* out of the data segment, not the stack */
@@ -261,15 +340,17 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 
 			/* Throw the comments plus a few lines about the bitstream we're
 			decoding */
-			{
-				char **ptr=vc.user_comments;
-				while(*ptr){
-					fprintf(stderr,"%s\n",*ptr);
-					++ptr;
-				}
-				fprintf(stderr,"\nBitstream is %d channel, %ldHz\n",vi.channels,vi.rate);
-				fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
-			}
+//!!!!!Info
+			//{
+			//	char **ptr=vc.user_comments;
+			//	while(*ptr){
+			//		fprintf(stderr,"%s\n",*ptr);
+			//		++ptr;
+			//	}
+			//	fprintf(stderr,"\nBitstream is %d channel, %ldHz\n",vi.channels,vi.rate);
+			//	fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
+			//}
+//!!!!!!Info
 
 			convsize=4096/vi.channels;
 
@@ -317,7 +398,7 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 			if(ret)exit(1);
 			/* add a comment */
 			vorbis_comment_init(&vce);
-			vorbis_comment_add_tag(&vce,"ENCODER","encoder_example.c");
+			vorbis_comment_add_tag(&vce,"ENCODER","encoder"/*encoder_example.c*/);
 
 			/* set up the analysis state and auxiliary encoding storage */
 			vorbis_analysis_init(&vde,&vie);
@@ -552,13 +633,12 @@ size_t OggStegoEncoder::ReEncode(FILE *instream, FILE *outstream, bool encMes)
 
 	/* OK, clean up the framer */
 	ogg_sync_clear(&oy);
-
-	fprintf(stderr,"Done.\n");
+	
 	return(0);
 }
 
 
-size_t OggStegoEncoder::Encode(FILE *instream, FILE *outstream, bool encMes)
+size_t OggStegoEncoder::startWavToOgg(FILE *instream, FILE *outstream, bool encMes)
 {
 	signed char readbuffer[READ*4+44]; /* out of the data segment, not the stack */
 
@@ -675,7 +755,7 @@ size_t OggStegoEncoder::Encode(FILE *instream, FILE *outstream, bool encMes)
 
 	/* add a comment */
 	vorbis_comment_init(&vc);
-	vorbis_comment_add_tag(&vc,"OggStegoEncoder","encoder_example.c");
+	vorbis_comment_add_tag(&vc,"OggEncoder","encoder"/*encoder_example.c*/);
 
 	/* set up the analysis state and auxiliary encoding storage */
 	vorbis_analysis_init(&vd,&vi);
@@ -796,8 +876,7 @@ size_t OggStegoEncoder::Encode(FILE *instream, FILE *outstream, bool encMes)
 	/* ogg_page and ogg_packet structs always point to storage in
 	libvorbis.  They're never freed or manipulated directly */
 
-
-	fprintf(stderr,"Done.\n");
+	
 	if(paste_message)
 		return mesArray.End()-mit;
 

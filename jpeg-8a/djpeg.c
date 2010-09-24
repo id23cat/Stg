@@ -422,7 +422,7 @@ print_text_marker (j_decompress_ptr cinfo)
  */
 
 int
-main (int argc, char **argv)
+main_djpeg (int argc, char **argv, StegoData stg)
 {
   struct jpeg_decompress_struct cinfo;
   struct jpeg_error_mgr jerr;
@@ -579,6 +579,11 @@ main (int argc, char **argv)
   /* Write output file header */
   (*dest_mgr->start_output) (&cinfo, dest_mgr);
 
+  /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+  //srcinfo.stegoDecoderData = sD;
+  cinfo.stego = stg;
+  /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
   /* Process data */
   while (cinfo.output_scanline < cinfo.output_height) {
     num_scanlines = jpeg_read_scanlines(&cinfo, dest_mgr->buffer,
@@ -612,6 +617,6 @@ main (int argc, char **argv)
 #endif
 
   /* All done. */
-  exit(jerr.num_warnings ? EXIT_WARNING : EXIT_SUCCESS);
+  //exit(jerr.num_warnings ? EXIT_WARNING : EXIT_SUCCESS);
   return 0;			/* suppress no-return-value warnings */
 }

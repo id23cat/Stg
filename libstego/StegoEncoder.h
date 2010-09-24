@@ -8,7 +8,7 @@
 #ifndef STEGOENCODER_H_
 #define STEGOENCODER_H_
 #pragma once
-#include "BitArray.h"
+#include "StegoArray.h"
 #include "LibInclude.h"
 
 #include "iostream"
@@ -22,31 +22,45 @@ using namespace std;
 //#endif
 //class LIBSTEGODLL StegoEncoder
 //#else
+#define PATH_LEN 512
 
 class StegoEncoder
+	//!OutOfRangeException = true;
 #endif
 {
+	//FILE *outstream;
+	FILE *errstream;	//stream for reopen stderr
+	char **srcfiles;	//list of source files
+	char **dstfiles;	//list of destination files
+	int filecount;		//count of file to open
+	char *dstdir;		//destination directory for result steganos
+	
 protected:
-	BitArray mesArray;
-	BitArray lenArray;
+	StegoArray mesArray;
 	BitArray::BitArrayIterator mit;
-	BitArray::BitArrayIterator lit;
+	
 	bool paste_message;
-	bool paste_length;
-	char *infile;
-	char *outfile;
+	size_t capacityBit;				//capacity of container in bits;
+	void genOutFileName(char *in, char *out, char *dir, int num=-1, int count=0);//
+			//generates name for destination file
+			//in--pointer to the input file name
+			//out--pointer to string for destination file name
+			//dir--destination directory
+			//num--number of file in file list
+			//count--total count of files
+
 public:
 	StegoEncoder(void);
 	~StegoEncoder(void);
 	void SetMessage(BYTE *mes, size_t len) throw(...);
-	//void SetMessageFile(wchar_t *mesFile) throw(...);
 	void SetMessageFile(char *mesFile) throw(...);
 	bool IsPasteMessage(){return paste_message;};			
-	bool IsPasteLength(){return paste_length;};				
-	void SetInFile(char *inf);							// set source media file for stego
-	void SetOutFile(char *outf);						// set destination media file for stego
+	//void AddContainer(char *file);
+	void SetDstDir(char *dir);
 public:
-	virtual int Encode(bool pasteMes=false)=0;
+	virtual int Encode(char *infile, char *outfile, bool pasteMes=false)=0;
+	//virtual int Encode(char **infiles, int count, char *dstdir=NULL, bool pasteMes=false)=0;
+	virtual size_t Test(char *infile)=0;				//count capacity of container in bytes
 };
 
 #endif /* STEGOENCODER_H_ */

@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory="$(SolutionDir)\test"
-				CommandArguments="r 01src.wav 01dst.ogg file file.out"
+				CommandArguments="-e 01src.ogg 01dst.ogg one.in"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"

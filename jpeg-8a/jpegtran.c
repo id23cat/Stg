@@ -371,7 +371,7 @@ parse_switches (j_compress_ptr cinfo, int argc, char **argv,
  */
 
 int
-main_tran (int argc, char **argv, StegoCData sC, StegoDData sD)
+main_tran (int argc, char **argv, StegoData stg)
 {
   struct jpeg_decompress_struct srcinfo;
   struct jpeg_compress_struct dstinfo;
@@ -495,8 +495,8 @@ main_tran (int argc, char **argv, StegoCData sC, StegoDData sD)
   jpeg_copy_critical_parameters(&srcinfo, &dstinfo);
 
   /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-  srcinfo.stegoDecoderData = sD;
-  dstinfo.stegoEncoderData = sC;
+  //srcinfo.stegoDecoderData = sD;
+  dstinfo.stego = stg;
   /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
   /* Adjust destination parameters if required by transform options;
@@ -565,6 +565,6 @@ main_tran (int argc, char **argv, StegoCData sC, StegoDData sD)
 #endif
 
   /* All done. */
-  exit(jsrcerr.num_warnings + jdsterr.num_warnings ?EXIT_WARNING:EXIT_SUCCESS);
+  //exit(jsrcerr.num_warnings + jdsterr.num_warnings ?EXIT_WARNING:EXIT_SUCCESS);
   return 0;			/* suppress no-return-value warnings */
 }

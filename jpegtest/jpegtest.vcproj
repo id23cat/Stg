@@ -62,6 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libstego.lib libjpeg.lib libbmp.lib jpegtran.lib"
+				OutputFile="$(SolutionDir)\test\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;"
 				IgnoreAllDefaultLibraries="false"
@@ -138,6 +139,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libstego.lib libjpeg.lib libbmp.lib jpegtran.lib"
+				OutputFile="$(SolutionDir)\Test\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;"
 				GenerateDebugInformation="true"
@@ -177,6 +179,18 @@
 		<ProjectReference
 			ReferencedProjectIdentifier="{E61592E1-28F4-4AFC-9EE1-9BE833A061C1}"
 			RelativePathToProject=".\jpeg-8a\jpeg.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{B4F61778-C45D-45C6-9E87-06F03F50519F}"
+			RelativePathToProject=".\jpeg-8a\cjpeg.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{9B7E57AE-31CD-405E-8070-26A8303B9DC9}"
+			RelativePathToProject=".\jpeg-8a\djpeg.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{813C33AF-9031-49D2-BA19-93D600CDD404}"
+			RelativePathToProject=".\jpeg-8a\jpegtran.vcproj"
 		/>
 	</References>
 	<Files>

@@ -468,7 +468,7 @@ parse_switches (j_compress_ptr cinfo, int argc, char **argv,
  */
 
 int
-main (int argc, char **argv)
+main_cjpeg (int argc, char **argv, StegoData stg)
 {
   struct jpeg_compress_struct cinfo;
   struct jpeg_error_mgr jerr;
@@ -589,6 +589,11 @@ main (int argc, char **argv)
   /* Start compressor */
   jpeg_start_compress(&cinfo, TRUE);
 
+  /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+  //srcinfo.stegoDecoderData = sD;
+  cinfo.stego = stg;
+  /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
   /* Process data */
   while (cinfo.next_scanline < cinfo.image_height) {
     num_scanlines = (*src_mgr->get_pixel_rows) (&cinfo, src_mgr);
@@ -611,6 +616,6 @@ main (int argc, char **argv)
 #endif
 
   /* All done. */
-  exit(jerr.num_warnings ? EXIT_WARNING : EXIT_SUCCESS);
+  //exit(jerr.num_warnings ? EXIT_WARNING : EXIT_SUCCESS);
   return 0;			/* suppress no-return-value warnings */
 }

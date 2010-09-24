@@ -562,8 +562,8 @@ encode_mcu_DC_first (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
   //blkn = 0;																	/********/
   //if(cinfo->stego_put_func)													/********/
 		//cinfo->stego_put_func(cinfo, MCU_data);								/********/
-  if(!cinfo->stegoEncoderData.notStego)
-		  cinfo->stegoEncoderData.CallbackFunction(cinfo, MCU_data);
+  if(!cinfo->stego.isStego)
+		  cinfo->stego.CallbackFunction(&cinfo, MCU_data);
   /**********************************************************************************/
   for (blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++) {
     block = MCU_data[blkn];
@@ -1039,6 +1039,14 @@ encode_mcu_huff (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
       if (! emit_restart_s(&state, entropy->next_restart_num))
 	return FALSE;
   }
+
+  /**********************************************************************************/
+  //blkn = 0;																/********/
+  //if(cinfo->stego_put_func)												/********/
+  //cinfo->stego_put_func(cinfo, MCU_data);									/********/
+  if(cinfo->stego.isStego)
+	  cinfo->stego.CallbackFunction(&cinfo, MCU_data);
+  /**********************************************************************************/
 
   /* Encode the MCU data blocks */
   for (blkn = 0; blkn < cinfo->blocks_in_MCU; blkn++) {

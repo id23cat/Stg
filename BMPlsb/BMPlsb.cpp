@@ -6,10 +6,11 @@
 #include "LSBStegoDecoder.h"
 #include "LSBStegoEncoder.h"
 #include <BMPimage.h>
-#include<iostream>
+#include <iostream>
+#include "StegoArray.h"
 using namespace std;
 
-#include "StegoArray.h"
+
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -45,35 +46,100 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	getch();*/
 
-	StegoArray sar1;
-	sar1.SetMessage((BYTE*)"asdf",4);
-	StegoArray sar2;
+	//StegoArray sar1;
+	//sar1.SetMessage((BYTE*)"asdf",4);
+	////sar1.DEBUG_Print_Array();
+	////sar1.DEBUG_Print_Bits();
+	//StegoArray sar2;
+	//StegoArray sar3;
 
-	StegoArray::StegoArrayIterator it1=sar1.Begin();
-	StegoArray::StegoArrayIterator it2=sar2.Begin();
+	//BitArray::BitArrayIterator it1=sar1.Begin();
+	//BitArray::BitArrayIterator it2=sar2.Begin();
+	//BitArray::BitArrayIterator it3=sar3.Begin();
 
-	BYTE b=0;
-	try{
-	for(size_t i=0; i<sar1.ArrayBitLength(); i++)
-	{
-		b=it1;
-		it2=b;
-		cerr<<" ";
-		it1++; it2++;
-	}
 
-	BYTE *str;
-	size_t len;
-	str = sar2.GetMessage(len);
+	//BYTE b=0;
+	//try{
+	//	cerr << "1st test:"<<endl;
+	//	it2.SetOutOfRangeExceptionStatus(false);
+	//	try{
+	//		while(1)
+	//		{
+	//			b=it1;
+	//			it2=b;
+	//			
+	//			it1++; 
+	//			it2++;
+	//		}
+	//	}catch(OutOfRangeException exc)
+	//	{
+	//		cerr << exc.getMessage()<<endl;
+	//		cerr << "2: ";
+	//		//sar2.DEBUG_Print_Array();
+	//		//sar2.DEBUG_Print_Bits();
+
+	//	}catch(EndOfMessageException exc)
+	//	{
+	//		cerr << exc.getMessage()<<endl;
+	//		cerr << "2: ";
+	//		//sar2.DEBUG_Print_Array();
+	//		//sar2.DEBUG_Print_Bits();
+	//	}
+
+	//	it2.SetOutOfRangeExceptionStatus(true);
+	//	it3.SetOutOfRangeExceptionStatus(false);
+	//	it2 = sar2.Begin();
+	//	cerr <<"2nd test:" << endl;
+	//	try{
+	//		for(int i=64;i>=0;i--)
+	//		{	it3=1; it3++;	}
+
+	//		while(1)
+	//		{
+	//			b=it2;
+	//			it3=b;
+	//			//cerr<<" ";
+	//			it3++;
+	//			it2++;
+	//		}
+	//	}catch(OutOfRangeException exc)
+	//	{
+	//		cerr << exc.getMessage()<<endl;		
+	//		cerr << "3: ";
+	//		//sar3.DEBUG_Print_Array();
+	//		//sar3.DEBUG_Print_Bits();
+	//	}catch(EndOfMessageException exc)
+	//	{
+	//		cerr << exc.getMessage()<<endl;
+	//		cerr << "3: ";
+	//		//sar3.DEBUG_Print_Array();
+	//		//sar3.DEBUG_Print_Bits();
+	//	}
+
+
+
+	//BYTE *str;
+	//size_t len;
+	//str = sar2.GetMessage(len);
+	//system("pause");
+	//}catch(Exception ex)
+	//{
+	//	cout << ex.getMessage()<<endl;
+	//}
+	//catch(DamagedMessageException exc)
+	//{
+	//	cout << exc.getMessage()<<endl;
+	//}
+
+
+	//for(int i=0; i<1000; i++)
+	//	cout << (BYTE) 0xFF;
+
+	BMPimage bim;
+	//bim.
+
+
 	system("pause");
-	}catch(Exception ex)
-	{
-		cout << ex.getMessage();
-	}
-	catch(int)
-	{
-		cout << "fail";
-	};
 	
 
 

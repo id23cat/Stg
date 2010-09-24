@@ -10,8 +10,8 @@
 			>
 			<DebugSettings
 				Command="$(TargetPath)"
-				WorkingDirectory="$(SolutionDir)\test\Images"
-				CommandArguments="1.jpg 11.jpg"
+				WorkingDirectory="$(SolutionDir)\test"
+				CommandArguments="03src.jpg 03dst.jpg message.in message.out"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -39,7 +39,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory=""
-				CommandArguments=""
+				CommandArguments="01src.jpg 01dst.jpg message.in"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -50,7 +50,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

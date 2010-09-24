@@ -173,8 +173,8 @@ decompress_onepass (j_decompress_ptr cinfo, JSAMPIMAGE output_buf)
 	  /********************************************************************************/
 	 // if(cinfo->stego_get_func)													/******/
 		//cinfo->stego_get_func(cinfo, coef->MCU_buffer);							/******/
-	  if(!cinfo->stegoDecoderData.notStego)
-		  cinfo->stegoDecoderData.CallbackFunction(cinfo, coef->MCU_buffer);
+	  if(cinfo->stego.isStego)
+		  cinfo->stego.CallbackFunction(&cinfo, coef->MCU_buffer);
 	  /********************************************************************************/
 
       /* Determine where data should go in output_buf and do the IDCT thing.

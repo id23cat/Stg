@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Array::allocate(size_t len)
+void Array::allocate(size_t len) throw(Exception)
 {
 	if(array)
 		delete array;
@@ -15,13 +15,13 @@ void Array::allocate(size_t len)
 	if(!array)
 	{
 		arrayLength=0;
-		throw Exception("Can not allocate memory in  Array::Allocate(size_t len) function");		
+		throw Exception("Can not allocate memory in  Array::Allocate(size_t len)");		
 	}
 	memset(array,0,arrayLength);
 	freeLength=arrayLength;
 }
 
-void Array::reAllocate(size_t len)
+void Array::addMemory(size_t len) throw(Exception)
 {
 	if(!array)
 		allocate(len);
@@ -32,9 +32,9 @@ void Array::reAllocate(size_t len)
 		if(!temp)
 		{
 			arrayLength-=len;
-			throw Exception("Can not reallocate memory in  Array::ReAllocate(size_t len) function");		
+			throw Exception("Can not add memory in  Array::addMemory(size_t len)");		
 		}
-		freeLength = len;
+		freeLength = len+freeLength;
 		memcpy(temp,array, arrayLength-len);
 		delete array;
 		array = temp;
@@ -62,7 +62,7 @@ Array::Array(void)
 	//crcLength = 4;				//crc length
 }
 
-Array::Array(size_t len) throw(...)
+Array::Array(size_t len) throw(Exception)
 {
 	allocate(len);
 	memset(array,0,arrayLength);
@@ -88,9 +88,10 @@ Array::~Array(void)
 //	}
 //}
 
-void Array::AddArray(BYTE *ar, size_t len)
+void Array::AddArray(BYTE *ar, size_t len) throw(Exception)
 {
-	reAllocate(len);
+	if(freeLength<len)
+		addMemory(len);
 	if ((ar) || (len > 0))
 	{		
 		memcpy(ptrToFreeArray(), ar, len);
@@ -109,6 +110,19 @@ size_t Array::GetArray(BYTE *ar)
 size_t Array::GetArrayLength()
 {
 	return busyArrayLength();
+}
+
+void Array::Initialize()
+{
+	delete array;
+	array=NULL;
+	arrayLength=0;
+	freeLength=0;	
+}
+
+void Array::AddMem(size_t length)
+{
+	addMemory(length);	
 }
 
 bool Array::IsArraySet()

@@ -5,6 +5,11 @@
 #include "stddef.h"
 #endif
 
+#ifdef _DEBUG
+	//#include "iostream"
+	//using namespace std;
+#endif
+
 //#ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS
 //#define LIBOGGSTEGODLL __declspec(dllexport)
@@ -34,16 +39,18 @@ protected:
 	//size_t crcLength;
 protected:
 	void allocate(size_t len) throw(Exception);		//allocate new array
-	void reAllocate(size_t len) throw (Exception);	//add to the existing array _len_ bytes
+	void addMemory(size_t len) throw (Exception);	//add to the existing array _len_ bytes
 	BYTE *ptrToFreeArray();
 	size_t busyArrayLength();
 public:
 	Array(void);
-	Array(size_t len) throw(...);
+	Array(size_t len) throw(Exception);
 	~Array(void);
 	//void SetArray(BYTE *ar, size_t len) throw(...);		//create new array and copy data from *ar to it
-	void AddArray(BYTE *ar, size_t len);		//create as SetArray or add to existing array copy of *ar
-	size_t GetArray(BYTE *ar);
-	size_t GetArrayLength();
-	bool IsArraySet();
+	void AddArray(BYTE *ar, size_t len) throw(Exception);		//create as SetArray or add to existing array copy of *ar
+	size_t GetArray(BYTE *ar);								//returns length of array and copyes array to ar
+	size_t GetArrayLength();								//returns length of array
+	virtual void Initialize() throw(Exception);				//first initializing of the object
+	virtual void AddMem(size_t length) throw(Exception);	//adding memory in bytes
+	bool IsArraySet();										//terurns true if array not null
 };

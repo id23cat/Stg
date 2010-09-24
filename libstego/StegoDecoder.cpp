@@ -6,13 +6,14 @@
 StegoDecoder::StegoDecoder()
 {
 	get_message = true;
-	get_length = true;
-	mes_len = 0;
+	//get_length = true;
+	//mes_len = 0;
 	we=1;
 	//lenArray.SetArray(NULL, sizeof(size_t));
-	lenArray.AddArray(NULL, sizeof(size_t));
-	lit = lenArray.Begin();
+	//lenArray.AddArray(NULL, sizeof(size_t));
+	//lit = lenArray.Begin();
 	mit = mesArray.Begin();
+	mit.SetOutOfRangeExceptionStatus(false);
 }
 
 StegoDecoder::~StegoDecoder(void)
@@ -29,7 +30,7 @@ size_t StegoDecoder::GetMessageP(BYTE *ptr)
 	return mesArray.GetArray(ptr);
 }
 
-void StegoDecoder::SetMessageFile(char *mesFile) throw(...)
+void StegoDecoder::SaveMessageToFile(char *mesFile) throw(...)
 {
 	FILE *instream;
 	if( fopen_s( &instream, mesFile, "ab" ) != 0 )
@@ -38,12 +39,14 @@ void StegoDecoder::SetMessageFile(char *mesFile) throw(...)
 		sprintf(str,"Can not open file %s\n",mesFile);
 		throw Exception(str);		
 	};
-	size_t len = GetMessageLength();
-	BYTE *mes = new BYTE[len];
-	len = GetMessageP(mes);
+	size_t len;// = GetMessageLength();
+	BYTE *mes;// = new BYTE[len];
+	//len = GetMessageP(mes);
+
+	mes = mesArray.GetMessage(len);
 	len = fwrite(mes, sizeof(BYTE), len, instream);
 	fclose(instream);	
-	delete mes;
+	//delete mes;
 }
 
 void StegoDecoder::DecodeMessage(bool b)
@@ -51,9 +54,9 @@ void StegoDecoder::DecodeMessage(bool b)
 	if(b)
 	{
 		//lenArray.SetArray(NULL, sizeof(size_t));
-		lenArray.AddArray(NULL, sizeof(size_t));
-		lit = lenArray.Begin();
+		//lenArray.AddArray(NULL, sizeof(size_t));
+		//lit = lenArray.Begin();
 	}
-	get_message = b;
-	get_length = b;
+	//get_message = b;
+	//get_length = b;
 }

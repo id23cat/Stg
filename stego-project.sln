@@ -19,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oggtest", "oggtest\oggtest.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg", "libogg\win32\VS2008\libogg_static.vcproj", "{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cjpeg", "jpeg-8a\cjpeg.vcproj", "{B4F61778-C45D-45C6-9E87-06F03F50519F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "djpeg", "jpeg-8a\djpeg.vcproj", "{9B7E57AE-31CD-405E-8070-26A8303B9DC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -99,6 +103,22 @@ Global
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release_SSE2|Win32.Build.0 = Release_SSE2|Win32
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|Win32.ActiveCfg = Release|Win32
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|Win32.Build.0 = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Debug|Win32.ActiveCfg = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Debug|Win32.Build.0 = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release_SSE|Win32.ActiveCfg = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release_SSE|Win32.Build.0 = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release_SSE2|Win32.ActiveCfg = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release_SSE2|Win32.Build.0 = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release|Win32.ActiveCfg = Release|Win32
+		{B4F61778-C45D-45C6-9E87-06F03F50519F}.Release|Win32.Build.0 = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Debug|Win32.ActiveCfg = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Debug|Win32.Build.0 = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release_SSE|Win32.ActiveCfg = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release_SSE|Win32.Build.0 = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release_SSE2|Win32.ActiveCfg = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release_SSE2|Win32.Build.0 = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release|Win32.ActiveCfg = Release|Win32
+		{9B7E57AE-31CD-405E-8070-26A8303B9DC9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

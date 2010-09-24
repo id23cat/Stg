@@ -98,18 +98,18 @@ typedef union BYTE_B
 //#define LOGFILEC "Cstatistic.log"
 //#define LOGFILED "Dstatistic.log"
 
-typedef struct JEPointerStruct
-{
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
-	void (*CallbackFunction)(j_compress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function
-	void *stegoObjPtr;						//pointer to the stego oject
-}JpegECallbackData;
-
-typedef struct JDPointerStruct
-{
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
-	void (*CallbackFunction)(j_decompress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function
-	void *stegoObjPtr;						//pointer to the stego oject
-}JpegDCallbackData;
+//typedef struct JEPointerStruct
+//{
+//	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
+//	void (*CallbackFunction)(j_compress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function
+//	void *stegoObjPtr;						//pointer to the stego oject
+//}JpegECallbackData;
+//
+//typedef struct JDPointerStruct
+//{
+//	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0
+//	void (*CallbackFunction)(j_decompress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function
+//	void *stegoObjPtr;						//pointer to the stego oject
+//}JpegDCallbackData;
 
 #endif	//!defined(CONSTANTS_H)

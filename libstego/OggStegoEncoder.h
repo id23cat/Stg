@@ -9,6 +9,11 @@ extern "C"
 }
 using namespace std;
 
+#ifdef _DEBUG
+static size_t ticE=0;
+#define LOWE (0x1F0+8)*8+3
+#define HIGE (0x1F1+8)*8
+#endif
 
 #ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS
@@ -20,19 +25,20 @@ using namespace std;
 //class LIBOGGSTEGODLL OggStegoEncoder: public StegoEncoder
 //#else
 class OggStegoEncoder: public StegoEncoder
+	//!OutOfRangeException = true;
 #endif
 {
-	void InitVorbisStego(vorbis_block *vb, bool encMes);
+	void InitVorbisStego(vorbis_block *vb, bool encodeMessage);		//Initialize stego encoder/decoder
 public:
-// 	static void StegoHideMessage(struct vorbis_block *vb, float *vector, int len);	//callback function
-// 	static void StegoHideLength(struct vorbis_block *vb, float *vector, int len);	//callback function
 	static void StegoHideMessage(void *vb, float *vector, int len);	//callback function
-	static void StegoHideLength(void *vb, float *vector, int len);	//callback function
+	static void StegoTestContainer(void *vb, float *vector, int len);	//test container
 public:
 	OggStegoEncoder(void);
-	~OggStegoEncoder(void);
+	~OggStegoEncoder(void);	
 
-	int Encode(bool pasteMes=false){return 1;};
-	size_t Encode(FILE *instream, FILE *outstream, bool encMes=false);
-	size_t ReEncode(FILE *instream, FILE *outstream, bool encMes=false);
+	int Encode(char *infile, char *outfile, bool pasteMes=false);
+	int Encode(char **infiles, int count, char *dstdir=NULL, bool pasteMes=false){return 0;};
+	size_t Test(char *infile);
+	size_t startWavToOgg(FILE *instream, FILE *outstream, bool encMes=false);
+	size_t startOggToOgg(FILE *instream, FILE *outstream, bool encMes=false);
 };

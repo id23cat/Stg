@@ -10,6 +10,12 @@ extern "C"
 #include <vorbis/codec.h>
 }
 
+#ifdef _DEBUG
+static size_t ticD=0;
+#define LOWD (0x1F0+8)*8+3
+#define HIGD (0x1F1+8)*8
+#endif
+
 #ifdef _WIN32
 //#ifdef LIBOGGSTEGODLL_EXPORTS
 //#define LIBOGGSTEGODLL __declspec(dllexport)
@@ -22,17 +28,17 @@ extern "C"
 //class LIBOGGSTEGODLL OggStegoDecoder: public StegoDecoder
 //#else
 class OggStegoDecoder: public StegoDecoder
+	//!OutOfRangeException = false;
 #endif
 {
-	void InitVorbisStego(vorbis_block *vb, bool decMes);
+	void InitVorbisStego(vorbis_block *vb, bool decodeMessage);
 
 public:
-// 	static void StegoGetMessage(struct vorbis_block *vb, float *vector, int len);	//callback function
-// 	static void StegoGetLength(struct vorbis_block *vb, float *vector, int len);	//callback function
 	static void StegoGetMessage(void *vb, float *vector, int len);	//callback function
-	static void StegoGetLength(void *vb, float *vector, int len);	//callback function
 public:
 	OggStegoDecoder(void);
 	~OggStegoDecoder(void);
-	size_t Decode(FILE *instream, FILE *outstream, bool decMes=false);
+
+	int Decode(char *infile, char *outfile=NULL, bool getMes=true);
+	size_t startDecodeOgg(FILE *instream, FILE *outstream, bool getMes=true);
 };

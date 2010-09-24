@@ -8,13 +8,18 @@
  * This file contains common declarations for the sample applications
  * cjpeg and djpeg.  It is NOT used by the core JPEG library.
  */
-
+#ifndef CDJPEG_H
+#define CDJPEG_H
 #define JPEG_CJPEG_DJPEG	/* define proper options in jconfig.h */
 #define JPEG_INTERNAL_OPTIONS	/* cjpeg.c,djpeg.c need to see xxx_SUPPORTED */
 #include "jinclude.h"
 #include "jpeglib.h"
 #include "jerror.h"		/* get library error codes too */
 #include "cderror.h"		/* get application-specific error codes */
+
+
+int main_djpeg (int argc, char **argv, StegoData stg);
+int main_cjpeg (int argc, char **argv, StegoData stg);
 
 
 /*
@@ -43,7 +48,6 @@ struct cjpeg_source_struct {
  */
 
 typedef struct djpeg_dest_struct * djpeg_dest_ptr;
-
 struct djpeg_dest_struct {
   /* start_output is called after jpeg_start_decompress finishes.
    * The color map will be ready at this time, if one is needed.
@@ -68,7 +72,6 @@ struct djpeg_dest_struct {
   JSAMPARRAY buffer;
   JDIMENSION buffer_height;
 };
-
 
 /*
  * cjpeg/djpeg may need to perform extra passes to convert to or from
@@ -185,3 +188,5 @@ EXTERN(FILE *) write_stdout JPP((void));
 #define EXIT_WARNING  2
 #endif
 #endif
+
+#endif //CDJPEG_H

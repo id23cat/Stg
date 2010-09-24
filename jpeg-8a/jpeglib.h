@@ -271,19 +271,26 @@ typedef struct jpeg_decompress_struct * j_decompress_ptr;
 
 /**********************************************************************************************/
 //#pragma once																				/**/
-typedef struct CCallbackStruct																/**/
+//typedef struct CCallbackStruct																/**/
+//{																							/**/
+//	int isStego;		//boolean parameter, 1 if we mast call stego function, else NOT 0	/**/
+//	void (*CallbackFunction)(j_compress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
+//	void *stegoObjPtr;						//pointer to the stego ooject					/**/
+//}StegoCData;																					/**/
+////#pragma once																				/**/
+//typedef struct DCallbackStruct																/**/
+//{																							/**/
+//	int isStego;		//boolean parameter, 1 if we mast call stego function, else NOT 0	/**/
+//	void (*CallbackFunction)(j_decompress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
+//	void *stegoObjPtr;						//pointer to the stego ooject					/**/
+//}StegoDData;																					/**/
+
+typedef struct CallbackStruct																/**/
 {																							/**/
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0	/**/
-	void (*CallbackFunction)(j_compress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
+	int isStego;		//boolean parameter, 1 if we mast call stego function, else NOT 0	/**/
+	void (*CallbackFunction)(void* scinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
 	void *stegoObjPtr;						//pointer to the stego ooject					/**/
-}StegoCData;																					/**/
-//#pragma once																				/**/
-typedef struct DCallbackStruct																/**/
-{																							/**/
-	int notStego;		//boolean parameter, 0 if we mast call stego function, else NOT 0	/**/
-	void (*CallbackFunction)(j_decompress_ptr cinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
-	void *stegoObjPtr;						//pointer to the stego ooject					/**/
-}StegoDData;																					/**/
+}StegoData;																					/**/
 /**********************************************************************************************/
 
 
@@ -451,7 +458,7 @@ struct jpeg_compress_struct {
   int script_space_size;
 /**********************************************************************************/
   //JMETHOD(void, stego_put_func, (JCOEFPTR block));								//!!
-  StegoCData stegoEncoderData;
+  StegoData stego;
 /**********************************************************************************/
 };
 
@@ -687,7 +694,7 @@ struct jpeg_decompress_struct {
   struct jpeg_color_quantizer * cquantize;
 /**********************************************************************************/
   //JMETHOD(void, stego_get_func, (JCOEFPTR block));								//!!
-  StegoDData stegoDecoderData;
+  StegoData stego;
 /**********************************************************************************/
 };
 

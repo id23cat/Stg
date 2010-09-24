@@ -1,17 +1,25 @@
 #include "StdAfx.h"
 #include "StegoArray.h"
 #include "AP_CRC16.h"
+#ifdef _DEBUG
+#include "iostream"
+using namespace std;
+#endif
 
 StegoArray::StegoArray(void)
 {
 	beginFlag = BEG_FLAG;
 	endFlag = END_FLAG;
+	messageLength = 0;
+	allocate(BEG_LEN);
 }
 
 StegoArray::StegoArray(size_t len):BitArray(len)
 {
 	beginFlag=BEG_FLAG;
 	endFlag=END_FLAG;
+	messageLength = 0;
+	allocate(BEG_LEN);
 }
 
 StegoArray::~StegoArray(void)
@@ -44,27 +52,33 @@ BYTE* StegoArray::GetMessage(size_t& len)
 }
 
 
-void StegoArray::SetBit(size_t byte, size_t bit, BYTE b) throw (...)
+void StegoArray::SetBit(size_t byte, size_t bit, BYTE b)  throw(Exception,
+																OutOfRangeException,
+																DamagedMessageException,
+																EndOfMessageException)
 {
 	BitArray::SetBit(byte, bit, b);
 
-	if(byte==BEG_LEN-1 && bit==7)			//checking of the  flag of the begining
+	if(byte==BEG_LEN-1 && bit==7)			//checking flag of the begining
 	{
-		BYTE *ar;
+		//BYTE *ar;
 		//pArray->GetArray(ar);
 		//if(strncmp((char*)ar, ((StegoArray*)pArray)->beginFlag, 4))
-		if(strncmp((char*)array, beginFlag, BEG_LEN))
+		if(!strncmp((char*)array, beginFlag, BEG_LEN))
 		{
-			throw (int)1;
+			addMemory(BEG_LEN + LEN_LEN);
+			//cout << "begins\n";
+			//throw (int)1;								// getting begins
 		}
 	}
-	if(byte==BEG_LEN+LEN_LEN-1 && bit==7)			//getting message length
+	else if(byte==BEG_LEN+LEN_LEN-1 && bit==7)			//getting message length
 	{
 		memcpy(&messageLength,array+BEG_LEN, LEN_LEN);
+		addMemory(BEG_LEN + LEN_LEN + messageLength + CRC_LEN);
 		//size_t *psize = (size_t*)array+4;
 		//messageLength = *psize;
 	}
-	if(byte==BEG_LEN+LEN_LEN+messageLength+CRC_LEN-1 && bit==7)		//check crc code
+	else if(byte==BEG_LEN+LEN_LEN+messageLength+CRC_LEN-1 && bit==7)		//check crc code
 	{
 		BYTE *t;
 		t=array+BEG_LEN+LEN_LEN+messageLength;
@@ -78,55 +92,98 @@ void StegoArray::SetBit(size_t byte, size_t bit, BYTE b) throw (...)
 		crc16.ComputeCRC16_ByteArray(array+BEG_LEN+LEN_LEN,messageLength,crc2);
 		crc16.CleanupCRC16System();
 		if(crc1 != crc2)
-			throw (int)1;
+			throw DamagedMessageException("CRC checksum not equal",array + BEG_LEN + LEN_LEN,messageLength);
+	}
+	else if(byte==BEG_LEN+LEN_LEN+messageLength+CRC_LEN+END_LEN-1 && bit==7)			//checking of the  flag of the begining
+	{
+		//BYTE *ar;
+		//pArray->GetArray(ar);
+		//if(strncmp((char*)ar, ((StegoArray*)pArray)->beginFlag, 4))
+		char *endf = (char*)array+BEG_LEN+LEN_LEN+messageLength+CRC_LEN;
+		if(!strncmp((char*)endf, endFlag, END_LEN))
+		{
+			//allocate(BEG_LEN);
+			throw EndOfMessageException("Getting finished!", messageLength);								// getting finished
+		}
+		else
+			throw DamagedMessageException("End flag may be damaged",array + BEG_LEN + LEN_LEN,messageLength);
 	}
 }
 
-StegoArray::StegoArrayIterator& StegoArray::Begin()
+void StegoArray::Initialize() throw(Exception)
 {
-	//BitArrayIterator it(0,0,this);
-	return *new StegoArrayIterator(0,0,this);
+	allocate(BEG_LEN);
+	messageLength = 0;
 }
 
-StegoArray::StegoArrayIterator& StegoArray::End()
+#ifdef _DEBUG
+void StegoArray::DEBUG_Print_Array()
 {
-	//return *new BitArrayIterator(maxByteIndex, maxBitIndex,this);
-	return *new StegoArrayIterator(arrayLength-1, 7,this);
+	cerr << "DEBUG ARRAY:\n";
+	for(int i=0;i<arrayLength;i++)
+		cerr << array[i] << " ";
+	cerr << endl;
 }
 
-
-
-/// StegoArrayIterator
-StegoArray::StegoArrayIterator::StegoArrayIterator()
+void StegoArray::DEBUG_Print_Bits()
 {
+	cerr << "DEBUG BITS:\n";
+	for(int i=0;i<arrayLength;i++)
+	{
+		for (int j=0;j<8;j++)
+			cerr << (int)GetBit(i,j);
+		cerr << " ";
+	}
+	cerr << endl;
 }
+#endif
 
-StegoArray::StegoArrayIterator::StegoArrayIterator(size_t byte, size_t bit, StegoArray  *par)
-:BitArray::BitArrayIterator(byte,bit,par)		
-{
-	
-}
+//StegoArray::StegoArrayIterator& StegoArray::Begin()
+//{
+//	//BitArrayIterator it(0,0,this);
+//	//return *new StegoArrayIterator(0,0,this);
+//
+//}
+//
+//StegoArray::StegoArrayIterator& StegoArray::End()
+//{
+//	//return *new BitArrayIterator(maxByteIndex, maxBitIndex,this);
+//	return *new StegoArrayIterator(arrayLength-1, 7,this);
+//}
 
-StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator[](size_t index)  throw(...)
-{
-	BitArrayIterator::operator[](index);
-	return *this;
-}
 
-StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator=(BYTE bit)
-{
-	BitArrayIterator::operator=(bit);
-	return *this;
-}
 
-StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator=(StegoArrayIterator &it)
-{
-	BitArrayIterator::operator=(it);
-	return *this;
-}
-
-StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator++()
-{
-	BitArrayIterator::operator++();
-	return *this;
-}
+///// StegoArrayIterator
+//StegoArray::StegoArrayIterator::StegoArrayIterator()
+//{
+//}
+//
+//StegoArray::StegoArrayIterator::StegoArrayIterator(size_t byte, size_t bit, StegoArray  *par)
+//:BitArray::BitArrayIterator(byte,bit,par)		
+//{
+//	
+//}
+//
+//StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator[](size_t index)  throw(...)
+//{
+//	BitArrayIterator::operator[](index);
+//	return *this;
+//}
+//
+//StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator=(BYTE bit)
+//{
+//	BitArrayIterator::operator=(bit);
+//	return *this;
+//}
+//
+//StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator=(StegoArrayIterator &it)
+//{
+//	BitArrayIterator::operator=(it);
+//	return *this;
+//}
+//
+//StegoArray::StegoArrayIterator &StegoArray::StegoArrayIterator::operator++()
+//{
+//	BitArrayIterator::operator++();
+//	return *this;
+//}
