@@ -62,7 +62,7 @@ class DamagedMessageException:public Exception
 	size_t length;
 public:
 	DamagedMessageException(char *msg, BYTE *array, size_t len);//msg -- exception message
-																//array -- 
+																//array -- array which coused excepion
 																//len -- length of array in bytes
 	BYTE* GetArrayMessage(){return message_array;};
 	size_t GetLength(){return length;};

@@ -1,12 +1,14 @@
 #pragma once
+#if !defined(LSBSTEGOENCODER_H)
+#define LSBSTEGOENCODER_H
 #include "StegoEncoder.h"
-#include "BMPimage.h"
+#include <BMPimage.h>
 
 class LSBStegoEncoder :
 	public StegoEncoder
 {
-	BMPimage bmpSrc;
-	BMPimage bmpDst;
+	BMP bmpSrc;
+	//BMPimage bmpDst;
 public:
 	LSBStegoEncoder(void);
 	~LSBStegoEncoder(void);
@@ -15,5 +17,8 @@ public:
 	//void StegoHideLength(BYTE *data, int len);	//callback function
 
 	void StegoHide(BYTE *vector, int len);
-	int Encode(bool pasteMes);
+	int Encode(char *infile, char *outfile, bool pasteMes=false);
+	//int Encode(bool pasteMes);
+	size_t Test(char *infile,bool wrtLog=false);
 };
+#endif

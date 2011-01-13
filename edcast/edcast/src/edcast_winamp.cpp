@@ -243,13 +243,8 @@ int initedcast(struct winampDSPModule *this_mod)
     mainWindow->InitializeWindow();
 
     strcpy(mainWindow->m_currentDir, currentDir);
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
-	//CHAR* TTT = ATL_MAKEINTRESOURCE((UINT)IDD_EDCAST);
-
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
     mainWindow->Create((UINT)IDD_EDCAST, AfxGetMainWnd());
-	// mainWindow->Create("IDD_EDCAST", AfxGetMainWnd());
-	
     int x = getLastX();
     int y = getLastY();
     if (x < 0) {

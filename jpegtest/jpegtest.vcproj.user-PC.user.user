@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory="$(SolutionDir)\test"
-				CommandArguments="03src.jpg 03dst.jpg message.in message.out"
+				CommandArguments="01src.bmp 01dst.jpg 03src.jpg 03dst.jpg Лущик.doc Лущик-out.doc"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"

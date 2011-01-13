@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9,00"
 	Name="libedcast"
 	ProjectGUID="{4CE3C84B-9C7B-4F3F-B832-02C53BAFEA07}"
 	RootNamespace="libedcast"
 	Keyword="MFCProj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -44,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../external/include,../../external/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libstego&quot;;../../external/include;&quot;$(SolutionDir)\edcast\external\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
 				StringPooling="true"
 				RuntimeLibrary="0"
@@ -118,7 +119,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../external/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;../../external/include;&quot;$(SolutionDir)\edcast\external\include&quot;;&quot;$(SolutionDir)\libstego&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -144,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile=".\Debug\libedcast.lib"
+				OutputFile="$(SolutionDir)\libs\libedcast.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool

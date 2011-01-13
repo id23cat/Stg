@@ -422,7 +422,7 @@ print_text_marker (j_decompress_ptr cinfo)
  */
 
 int
-main_djpeg (int argc, char **argv, StegoData stg)
+main_djpeg (int argc, char **argv, JStegoData stg)
 {
   struct jpeg_decompress_struct cinfo;
   struct jpeg_error_mgr jerr;

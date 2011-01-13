@@ -54,6 +54,7 @@ void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 #endif
 				vector[i] = (float)1+bit;
 				pOSE->mit++;
+				pOSE->capacityBit++;
 				break;
 			}else if(vector[i]==-1 || vector[i]==-2)
 			{
@@ -65,6 +66,7 @@ void OggStegoEncoder::StegoHideMessage(void *vb, float *vector, int len)
 #endif
 				vector[i] = (float)-(1+bit);
 				pOSE->mit++;
+				pOSE->capacityBit++;
 				break;
 			}
 		}
@@ -115,6 +117,15 @@ int OggStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
 	char extl[4]={0};
 	for(int i=0;i<3;i++)
 		extl[i] = tolower(ext[i]);
+
+	len = strlen(outfile);
+	ext = outfile+(len-3);
+	if(!strcmp(extl,"wav\0"))
+	{
+		ext[0]='o';
+		ext[1]='g';
+		ext[2]='g';
+	}
 	FILE *instream, *outstream;
 	if( (instream = _fsopen( infile, ("r+b"), _SH_DENYNO)) == NULL )
 	{
@@ -142,10 +153,10 @@ int OggStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
 		return -1;
 	fclose(instream);
 	fclose(outstream);
-	return 0;
+	return ((size_t) capacityBit/8) - BEG_LEN - LEN_LEN - CRC_LEN - END_LEN;
 }
 
-size_t OggStegoEncoder::Test(char *infile)
+size_t OggStegoEncoder::Test(char *infile,bool wrtLog)
 {
 	size_t len = strlen(infile);
 	char *ext = infile+(len-3);

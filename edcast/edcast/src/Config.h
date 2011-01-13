@@ -18,7 +18,6 @@ class CConfig : public CDialog
 {
 // Construction
 public:
-	
 	CConfig(CWnd* pParent = NULL);   // standard constructor
     ~CConfig();
 

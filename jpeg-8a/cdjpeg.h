@@ -18,8 +18,8 @@
 #include "cderror.h"		/* get application-specific error codes */
 
 
-int main_djpeg (int argc, char **argv, StegoData stg);
-int main_cjpeg (int argc, char **argv, StegoData stg);
+int main_djpeg (int argc, char **argv, JStegoData stg);
+int main_cjpeg (int argc, char **argv, JStegoData stg);
 
 
 /*

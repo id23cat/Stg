@@ -76,7 +76,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(SolutionDir)\libs\$(ProjectName).lib"
+				OutputFile="$(SolutionDir)\libs\vorbis.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

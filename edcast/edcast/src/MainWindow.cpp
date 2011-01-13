@@ -623,10 +623,10 @@ CMainWindow::~CMainWindow() {
 }
 
 void CMainWindow::InitializeWindow() {
-	
 	configDialog = 0;
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
-	configDialog = new CConfig();	
+	configDialog = new CConfig();
+	
 	configDialog->Create((UINT) IDD_CONFIG, this);
 	configDialog->parentDialog = this;
 

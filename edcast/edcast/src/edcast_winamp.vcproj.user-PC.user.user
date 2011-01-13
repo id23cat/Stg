@@ -38,7 +38,7 @@
 			>
 			<DebugSettings
 				Command="C:\Program Files\Winamp\winamp.exe"
-				WorkingDirectory="C:\Program Files\Winamp\"
+				WorkingDirectory="C:\Program Files\Winamp"
 				CommandArguments=""
 				Attach="false"
 				DebuggerType="3"

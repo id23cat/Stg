@@ -15,6 +15,6 @@ void select_transform (JXFORM_CODE transform);
 int parse_switches (j_compress_ptr cinfo, int argc, char **argv,
 		int last_file_arg_seen, boolean for_real);
 
-int main_tran (int argc, char **argv, StegoData stg);
+int main_tran (int argc, char **argv, JStegoData stg);
 #endif //JPEGTRAN_H
 			   

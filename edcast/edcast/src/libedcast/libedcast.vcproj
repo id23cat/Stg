@@ -45,8 +45,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../external/include,../../external/include;C:\Work\Stego-project\libvorbis-1.2.3\include;C:\Work\Stego-project\libogg\include;C:\Work\edcast\external\include;C:\Work\Stego-project\bass\c"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WINVER=0x0400;WIN32;NDEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
+				AdditionalIncludeDirectories="../../../external/include,../../external/include"
+				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WINVER=0x06100;WIN32;NDEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -119,8 +119,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../external/include;C:\Work\Stego-project\libvorbis-1.2.3\include;C:\Work\Stego-project\libogg\include;C:\Work\edcast\external\include;C:\Work\Stego-project\bass\c"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
+				AdditionalIncludeDirectories="../../../external/include"
+				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WINVER=0x06100;WIN32;_DEBUG;_LIB;HAVE_VORBIS;HAVE_LAME;HAVE_FAAC;HAVE_AACP;HAVE_FLAC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../../../external/lib\libedcast.lib"
+				OutputFile=".\Debug\libedcast.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool

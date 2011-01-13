@@ -27,19 +27,19 @@ void JpegStegoDecoder::InitJpegStego(bool decMes)
 	sData.stegoObjPtr = this;		
 }
 
-int JpegStegoDecoder::selectPosition(JCOEF *coef)
-{
-	for(size_t i=0; i<ALLOW; i++)
-	{
-		switch(coef[allowable_position[i]])
-			case 0:
-			case 1:
-			case -1:{
-				return allowable_position[i];
-					}
-	}
-	return -1;
-}
+//int JpegStegoDecoder::selectPosition(JCOEF *coef)
+//{
+//	for(size_t i=0; i<ALLOW; i++)
+//	{
+//		switch(coef[allowable_position[i]])
+//			case 0:
+//			case 1:
+//			case -1:{
+//				return allowable_position[i];
+//					}
+//	}
+//	return -1;
+//}
 
 //void JpegStegoDecoder::StegoGetMessage(j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 //{
@@ -105,7 +105,7 @@ void JpegStegoDecoder::StegoGetMessage(void *cinfo, JBLOCKROW *MCU_data)
 			compptr = dcinfo->cur_comp_info[dcinfo->MCU_membership[blkn]];
 			if(pJSD->get_message)
 			{
-				DCT_pos = pJSD->selectPosition(MCU_data[blkn][0]);
+				DCT_pos = /*pJSD->*/selectPosition(MCU_data[blkn][0]);
 				BYTE bit = abs(MCU_data[blkn][0][DCT_pos]);
 				//cerr << (int)bit;
 				if(DCT_pos != -1 && (bit==1 ||bit==0) )

@@ -11,13 +11,15 @@
 HWND win=NULL;
 DWORD cthread=0;
 HSTREAM chan;
+FILE *file;
 
 const char *urls[10]={ // preset stream URLs
+	"C:\\Music\\stream.ogg.m3u",
 	"http://www.radioparadise.com/musiclinks/rp_128-9.m3u","http://www.radioparadise.com/musiclinks/rp_32.m3u",
 	"http://www.sky.fm/mp3/classical.pls","http://www.sky.fm/mp3/classical_low.pls",
 	"http://www.sky.fm/mp3/the80s.pls","http://www.sky.fm/mp3/the80s_low.pls",
 	"http://somafm.com/tags.pls","http://somafm.com/tags32.pls",
-	"http://somafm.com/secretagent.pls","http://somafm.com/secretagent24.pls"
+	"http://somafm.com/secretagent.pls"/*,"http://somafm.com/secretagent24.pls"*/
 };
 
 char proxy[100]=""; // proxy server
@@ -80,6 +82,11 @@ void CALLBACK StatusProc(const void *buffer, DWORD length, void *user)
 {
 	if (buffer && !length)
 		MESS(32,WM_SETTEXT,0,buffer); // display connection status
+
+	if (!file) file=fopen("radio.ogg", "wb"); // create the file
+	if (!buffer) fclose(file); // finished downloading
+	else fwrite(buffer, 1, length, file);
+
 }
 
 void __cdecl OpenURL(char *url)

@@ -26,10 +26,10 @@ protected:
 	bool get_message;
 	//bool get_length;
 	//size_t mes_len;
-	int we;
+	//int we;
 public:
 	StegoDecoder(void);
-	~StegoDecoder(void);
+	virtual ~StegoDecoder(void);
 	size_t GetMessageLength();
 	size_t GetMessageP(BYTE *ptr);
 	void SaveMessageToFile(char *mesFile) throw(...);

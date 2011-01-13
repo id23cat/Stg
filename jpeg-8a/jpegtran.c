@@ -371,7 +371,7 @@ parse_switches (j_compress_ptr cinfo, int argc, char **argv,
  */
 
 int
-main_tran (int argc, char **argv, StegoData stg)
+main_tran (int argc, char **argv, JStegoData stg)
 {
   struct jpeg_decompress_struct srcinfo;
   struct jpeg_compress_struct dstinfo;

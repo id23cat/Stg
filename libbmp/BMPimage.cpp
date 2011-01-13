@@ -226,6 +226,7 @@ int BMPimage::WriteRGB(char *fname)throw(...)
 	WriteHeader(out);
 	writeData(out);
 	out.close();*/
+	WriteToFile(fname);
 	return 0;
 }
 

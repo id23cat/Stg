@@ -1,4 +1,4 @@
-
+#pragma once
 #if !defined(CONSTANTS_H)
 #define CONSTANTS_H
 
@@ -69,6 +69,7 @@ const int jpeg_zigzag_order[DCTSIZE2] = {
 
 #define ALLOW 16
 #define  nt(i) jpeg_natural_order[i]
+#define  zt(i) jpeg_zigzag_order[i]
 
 // Допустимые коэффициенты для встраивания
 const int allowable_position[ALLOW] = {
@@ -77,6 +78,35 @@ const int allowable_position[ALLOW] = {
 	nt(18),	nt(19),	nt(23),	nt(24),
 	nt(25),	nt(31),	nt(32),	nt(39)
 };
+
+// Допустимые позиции для Коха-Жао
+#define ALLOW_KOCH 18
+struct LKoch
+{
+	int l1, l2,l3;
+};
+
+const int KochZhaoPositions[ALLOW_KOCH][3] = {
+	{zt(2), zt(9), zt(10)},
+	{zt(9), zt(2), zt(10)},
+	{zt(3), zt(10), zt(11)},
+	{zt(10), zt(3), zt(11)},
+	{zt(9), zt(2), zt(10)},
+	{zt(2), zt(9), zt(10)},
+	{zt(9), zt(16), zt(2)},
+	{zt(16), zt(9), zt(2)},
+	{zt(2), zt(9), zt(16)},
+	{zt(9), zt(2), zt(16)},
+	{zt(10), zt(17), zt(3)},
+	{zt(17), zt(10), zt(3)},
+	{zt(10), zt(3), zt(17)},
+	{zt(3), zt(10), zt(17)},
+	{zt(9), zt(16), zt(17)},
+	{zt(16), zt(9), zt(17)},
+	{zt(10), zt(17), zt(18)},
+	{zt(17), zt(10), zt(18)}
+};
+
 
 
 typedef union BYTE_B

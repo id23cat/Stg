@@ -468,7 +468,7 @@ parse_switches (j_compress_ptr cinfo, int argc, char **argv,
  */
 
 int
-main_cjpeg (int argc, char **argv, StegoData stg)
+main_cjpeg (int argc, char **argv, JStegoData stg)
 {
   struct jpeg_compress_struct cinfo;
   struct jpeg_error_mgr jerr;

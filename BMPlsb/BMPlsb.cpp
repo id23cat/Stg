@@ -5,6 +5,7 @@
 #include "conio.h"
 #include "LSBStegoDecoder.h"
 #include "LSBStegoEncoder.h"
+//#include "libstego.h"
 #include <BMPimage.h>
 #include <iostream>
 #include "StegoArray.h"

@@ -17,6 +17,8 @@
 #include <dmalloc.h>
 #endif
 
+#include <OggStegoEncoder.h>
+
 /*
 #ifdef _UNICODE
 #define char_t wchar_t
@@ -391,6 +393,9 @@ typedef struct {
 
 		int		LAMEJointStereoFlag;
 		CBUFFER	circularBuffer;
+/**************************************/
+		OggStegoEncoder ose;
+/**************************************/
 } edcastGlobals;
 
 

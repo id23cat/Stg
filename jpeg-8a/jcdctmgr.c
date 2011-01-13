@@ -81,6 +81,14 @@ forward_DCT (j_compress_ptr cinfo, jpeg_component_info * compptr,
     /* Perform the DCT */
     (*do_dct) (workspace, sample_data, start_col);
 
+	/**********************************************************************************/
+	//blkn = 0;																	/********/
+	//if(cinfo->stego_put_func)													/********/
+	//cinfo->stego_put_func(cinfo, MCU_data);								/********/
+	if(!cinfo->stego.isStegoAnalysis)
+		cinfo->stego.CallbackFunction2(&cinfo, workspace, bi);
+	/**********************************************************************************/
+
     /* Quantize/descale the coefficients, and store into coef_blocks[] */
     { register DCTELEM temp, qval;
       register int i;

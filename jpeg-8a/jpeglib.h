@@ -25,6 +25,7 @@
 #include "jconfig.h"		/* widely used configuration options */
 #endif
 #include "jmorecfg.h"		/* seldom changed options */
+#include <stdio.h>
 
 
 #ifdef __cplusplus
@@ -285,12 +286,16 @@ typedef struct jpeg_decompress_struct * j_decompress_ptr;
 //	void *stegoObjPtr;						//pointer to the stego ooject					/**/
 //}StegoDData;																					/**/
 
-typedef struct CallbackStruct																/**/
+typedef struct JCallbackStruct																/**/
 {																							/**/
 	int isStego;		//boolean parameter, 1 if we mast call stego function, else NOT 0	/**/
 	void (*CallbackFunction)(void* scinfo, JBLOCKROW *MCU_data);	//Stego function			/**/
 	void *stegoObjPtr;						//pointer to the stego ooject					/**/
-}StegoData;																					/**/
+	int isStegoAnalysis;
+	void (*CallbackFunction2)(void* scinfo, int *workspace,int blkn);	//Stego function			/**/
+}JStegoData;																					/**/
+
+
 /**********************************************************************************************/
 
 
@@ -458,7 +463,7 @@ struct jpeg_compress_struct {
   int script_space_size;
 /**********************************************************************************/
   //JMETHOD(void, stego_put_func, (JCOEFPTR block));								//!!
-  StegoData stego;
+  JStegoData stego;
 /**********************************************************************************/
 };
 
@@ -694,7 +699,7 @@ struct jpeg_decompress_struct {
   struct jpeg_color_quantizer * cquantize;
 /**********************************************************************************/
   //JMETHOD(void, stego_get_func, (JCOEFPTR block));								//!!
-  StegoData stego;
+  JStegoData stego;
 /**********************************************************************************/
 };
 

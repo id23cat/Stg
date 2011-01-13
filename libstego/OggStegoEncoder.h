@@ -38,7 +38,7 @@ public:
 
 	int Encode(char *infile, char *outfile, bool pasteMes=false);
 	int Encode(char **infiles, int count, char *dstdir=NULL, bool pasteMes=false){return 0;};
-	size_t Test(char *infile);
+	size_t Test(char *infile,bool wrtLog=false);
 	size_t startWavToOgg(FILE *instream, FILE *outstream, bool encMes=false);
 	size_t startOggToOgg(FILE *instream, FILE *outstream, bool encMes=false);
 };

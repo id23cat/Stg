@@ -108,7 +108,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				EnableIntrinsicFunctions="false"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\jpeg-8a\&quot;;&quot;$(SolutionDir)\libbmp\&quot;;&quot;$(SolutionDir)\libogg\include\ogg&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\jpeg-8a\&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;&quot;$(SolutionDir)\libbmp&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBOGGSTEGO_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -157,6 +157,10 @@
 			ReferencedProjectIdentifier="{E61592E1-28F4-4AFC-9EE1-9BE833A061C1}"
 			RelativePathToProject=".\jpeg-8a\jpeg.vcproj"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{F0A4BD16-3040-4280-9AAF-B7D1FB082DDC}"
+			RelativePathToProject=".\libbmp\libbmp.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -185,11 +189,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JpegStegoAnalysis.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\JpegStegoDecoder.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\JpegStegoEncoder.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\JpegStegoLog.cpp"
 				>
 			</File>
 			<File
@@ -202,6 +214,10 @@
 			</File>
 			<File
 				RelativePath=".\LSBStegoEncoder.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Methods.cpp"
 				>
 			</File>
 			<File
@@ -279,6 +295,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JpegStegoAnalysis.h"
+				>
+			</File>
+			<File
 				RelativePath=".\JpegStegoDecoder.h"
 				>
 			</File>
@@ -287,7 +307,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JpegStegoLog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\LibInclude.h"
+				>
+			</File>
+			<File
+				RelativePath=".\libstego.h"
 				>
 			</File>
 			<File
@@ -296,6 +324,10 @@
 			</File>
 			<File
 				RelativePath=".\LSBStegoEncoder.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Methods.h"
 				>
 			</File>
 			<File
@@ -338,7 +370,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\ClassDiagram2.cd"
+			RelativePath=".\ClassDiagram11.cd"
 			>
 		</File>
 		<File
