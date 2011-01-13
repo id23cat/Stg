@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="stego-project">
+</Property><Property Name="Solution File" Value="C:\Work\Stego-project\stego-project.sln">
+</Property><Property Name="User Options File" Value="C:\Work\Stego-project\stego-project.suo">
+</Property><Property Name="Date" Value="8 октября 2010 г.">
+</Property><Property Name="Time" Value="10:32">
+</Property><Property Name="Log Number" Value="4">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="stego-project.sln" Description="File successfully backed up as C:\Work\Stego-project\stego-project.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="stego-project.suo" Description="File successfully backed up as C:\Work\Stego-project\stego-project.suo.old">
+</Event><Event ErrorLevel="0" Project="libogg-stego" Source="libstego\libogg-stego.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libogg-stego" Source="libstego\libogg-stego.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BMPlsb" Source="BMPlsb\BMPlsb.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="BMPlsb" Source="BMPlsb\BMPlsb.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libbmp" Source="libbmp\libbmp.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libbmp" Source="libbmp\libbmp.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="jpeg" Source="jpeg-8a\jpeg.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="jpeg" Source="jpeg-8a\jpeg.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libvorbis_static" Source="libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_static.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libvorbis_static" Source="libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_static.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="jpegtest" Source="jpegtest\jpegtest.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="jpegtest" Source="jpegtest\jpegtest.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="jpegtran" Source="jpeg-8a\jpegtran.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="jpegtran" Source="jpeg-8a\jpegtran.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="oggtest" Source="oggtest\oggtest.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="oggtest" Source="oggtest\oggtest.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libogg_static" Source="libogg\win32\VS2008\libogg_static.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libogg_static" Source="libogg\win32\VS2008\libogg_static.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="cjpeg" Source="jpeg-8a\cjpeg.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="cjpeg" Source="jpeg-8a\cjpeg.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="djpeg" Source="jpeg-8a\djpeg.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="djpeg" Source="jpeg-8a\djpeg.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="edcast_winamp" Source="edcast\edcast\src\edcast_winamp.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="edcast_winamp" Source="edcast\edcast\src\edcast_winamp.vcproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="libedcast" Source="edcast\libedcast\libedcast.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="libedcast" Source="edcast\libedcast\libedcast.vcproj" Description="Project file successfully backed up as 'C:\Work\Stego-project\edcast\libedcast\libedcast.vcproj.8.00.old'.">
+</Event><Event ErrorLevel="0" Project="libedcast" Source="edcast\libedcast\libedcast.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libedcast" Source="edcast\libedcast\libedcast.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libvorbis_dynamic" Source="libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_dynamic.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libvorbis_dynamic" Source="libvorbis-1.2.3\win32\VS2008\libvorbis\libvorbis_dynamic.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libogg_dynamic" Source="libogg\win32\VS2008\libogg_dynamic.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="libogg_dynamic" Source="libogg\win32\VS2008\libogg_dynamic.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="netradio" Source="bass\c\netradio\netradio.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="netradio" Source="bass\c\netradio\netradio.vcproj" Description="Converted">
+</Event></UpgradeLog>
