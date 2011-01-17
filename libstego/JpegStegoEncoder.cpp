@@ -9,6 +9,9 @@ extern "C" {
 JpegStegoEncoder::JpegStegoEncoder(void)
 {
 	blog = false;
+	binary = false;
+	koch = false;
+	D = 10;
 	slog1 = NULL;
 	slog2 = NULL;
 	work_component;
@@ -32,7 +35,9 @@ void JpegStegoEncoder::InitJpegStego(bool encMes)
 {
 	if(encMes && paste_message)
 	{							
-		sData.CallbackFunction = &/*(this->*/StegoHideMessage;
+		sData.CallbackFunction = &StegoHideMessage;
+		if(koch)
+			sData.CallbackFunction = &StegoKochZhaoHide;
 		sData.isStego = 1;
 	}else if(!encMes)													//
 	{
@@ -233,11 +238,45 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 			compptr = ccinfo->cur_comp_info[ccinfo->MCU_membership[blkn]];
 			if(pJSE->paste_message)
 			{
-				DCT_pos = /*pJSE->*/KochZhaoPosition(MCU_data[blkn][0]);
-				MCU_data[blkn][0][DCT_pos.l1]=100;
-				MCU_data[blkn][0][DCT_pos.l2]=200;
-				MCU_data[blkn][0][DCT_pos.l3]=300;
-
+				bit = pJSE->mit;
+				for(int i=0;i<ALLOW_KOCH; i++)
+				{
+					DCT_pos = /*pJSE->*/KochZhaoPosition(i);
+					if(bit==1)
+					{
+						if(min(MCU_data[blkn][0][DCT_pos.l1],MCU_data[blkn][0][DCT_pos.l2])+pJSE->D-1
+							< MCU_data[blkn][0][DCT_pos.l3])
+						{
+							// here must be modification
+							continue;
+						}
+						MCU_data[blkn][0][DCT_pos.l1]+(pJSE->D>>1);
+						MCU_data[blkn][0][DCT_pos.l3]-(pJSE->D>>1)-1;
+						MCU_data[blkn][0][DCT_pos.l2]+(pJSE->D>>1);
+						MCU_data[blkn][0][DCT_pos.l3]-(pJSE->D>>1)-1;
+						pJSE->mit++;
+						break;
+					}else
+					{
+						if(max(MCU_data[blkn][0][DCT_pos.l1],MCU_data[blkn][0][DCT_pos.l2]) > 
+							MCU_data[blkn][0][DCT_pos.l3]+pJSE->D-1)
+						{
+							// here must be modification
+							continue;
+						}
+						MCU_data[blkn][0][DCT_pos.l1]-(pJSE->D>>1);
+						MCU_data[blkn][0][DCT_pos.l3]+(pJSE->D>>1)+1;
+						MCU_data[blkn][0][DCT_pos.l2]-(pJSE->D>>1);
+						MCU_data[blkn][0][DCT_pos.l3]+(pJSE->D>>1)+1;
+						pJSE->mit++;
+						break;
+					}
+					
+					/*MCU_data[blkn][0][DCT_pos.l1]=100;
+					MCU_data[blkn][0][DCT_pos.l2]=200;
+					MCU_data[blkn][0][DCT_pos.l3]=300;*/
+				}
+				//pJSE->mit++;
 				//if(DCT_pos != -1)
 				//{
 				//	bit = pJSE->mit;
@@ -275,8 +314,6 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 		//pOCD->isStego = 0;
 	}
 }
-
-
 
 void JpegStegoEncoder::StegoTestContainer(void *cinfo, JBLOCKROW *MCU_data)
 {
@@ -397,6 +434,17 @@ int JpegStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
 	}
 	fclose(fp);
 
+	if(blog)
+	{		
+		slog1 = new JpegStegoLog;
+		slog1->Bin(binary);
+		slog1->setLogFileName(infile);
+		slog1->openLOG(ALL);
+		/*slog2 = new JpegStegoLog;
+		slog2->setLogFileName(infile,"DCT");
+		slog2->openLOG(ALL);*/
+	}
+
 	InitJpegStego(true);
 	size_t len = strlen(infile);
 	char *ext = infile+(len-3);
@@ -415,6 +463,7 @@ int JpegStegoEncoder::Encode(char *infile, char *outfile, bool pasteMes)
 size_t JpegStegoEncoder::Test(char *infile, bool wrtLog)
 {
 	// test for existing input file
+	blog = wrtLog;
 	FILE *fp;
 	if ((fp = fopen(infile, READ_BINARY)) == NULL) {
 		throw FileNotFoundException("File not found\n",infile);
@@ -425,15 +474,12 @@ size_t JpegStegoEncoder::Test(char *infile, bool wrtLog)
 	}
 	fclose(fp);
 
-	if(wrtLog)
-	{
-		blog = wrtLog;
+	if(blog)
+	{		
 		slog1 = new JpegStegoLog;
+		slog1->Bin(binary);
 		slog1->setLogFileName(infile);
-		slog1->openLOG(ALL);
-		/*slog2 = new JpegStegoLog;
-		slog2->setLogFileName(infile,"DCT");
-		slog2->openLOG(ALL);*/
+		slog1->openLOG(ALL);		
 	}
 
 	InitJpegStego(false);

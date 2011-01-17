@@ -43,7 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libstego&quot;;&quot;$(SolutionDir)\jpeg-8a&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\libstego&quot;;&quot;$(SolutionDir)\jpeg-8a&quot;;&quot;$(SolutionDir)\libbmp&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,6 +64,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libstego.lib libjpeg.lib jpegtran.lib cjpeg.lib"
+				OutputFile="$(SolutionDir)\test\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)\libs&quot;"
 				IgnoreAllDefaultLibraries="false"

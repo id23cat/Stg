@@ -28,6 +28,7 @@ public:
 	int writeCoef(int coef);
 	int endBlock();
 	int endStr();
+	void Bin(bool b) {bin = b;};
 
 public:
 	BOOL ok;
@@ -37,6 +38,7 @@ private:
 	char log_fname[FNAME_LEN];
 	FILE * logfile;
 	unsigned counter;
+	bool bin;			// write in binary mode
 };
 
 #endif	//!defined(STEGOLOG_H)

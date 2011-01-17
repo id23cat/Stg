@@ -5,6 +5,7 @@ JpegStegoLog::JpegStegoLog(void)
 {
 	logfile = NULL;
 	ok = false;
+	bin = false;
 }
 
 JpegStegoLog::~JpegStegoLog(void)
@@ -34,15 +35,31 @@ int JpegStegoLog::openLOG(int component)
 	else
 		strcat_s(log_fname, 80, "ALL.log");
 
-	if (fopen_s(&logfile, log_fname, "w")!=0)
+	if(bin)
 	{
-		logfile = NULL;
-		ok = false;
-		Exception exc;
-		char strerr[STR_LEN];
-		sprintf_s(strerr, STR_LEN, "can't open LOG %s\n", log_fname);
-		exc.setMessage(strerr);
-		throw exc;
+		if (fopen_s(&logfile, log_fname, "wb")!=0)
+		{
+			logfile = NULL;
+			ok = false;
+			Exception exc;
+			char strerr[STR_LEN];
+			sprintf_s(strerr, STR_LEN, "can't open LOG %s\n", log_fname);
+			exc.setMessage(strerr);
+			throw exc;
+		}
+	}
+	else
+	{
+		if (fopen_s(&logfile, log_fname, "w")!=0)
+		{
+			logfile = NULL;
+			ok = false;
+			Exception exc;
+			char strerr[STR_LEN];
+			sprintf_s(strerr, STR_LEN, "can't open LOG %s\n", log_fname);
+			exc.setMessage(strerr);
+			throw exc;
+		}
 	}
 	counter=1;
 	ok = true;
@@ -65,10 +82,16 @@ int JpegStegoLog::writeData(int work_component,
 {
 	if(logfile==NULL)
 		return -1;
-	fprintf(logfile,"===========================%s=\n", toChar(work_component));
-	fprintf(logfile,"Writed %d bits of %d: %d\n", writed, length, counter++);
-	//fprintf(logfile,"Component ID( 1(Y), 2(Cb), 3(Cr) ): %d\n", toChar(cur_component));
-	fprintf(logfile,"Current component: %s\n", toChar(cur_component));
+	if(!bin)
+	{
+		fprintf(logfile,"===========================%s=\n", toChar(work_component));
+		fprintf(logfile,"Writed %d bits of %d: %d\n", writed, length, counter++);
+		//fprintf(logfile,"Component ID( 1(Y), 2(Cb), 3(Cr) ): %d\n", toChar(cur_component));
+		fprintf(logfile,"Current component: %s\n", toChar(cur_component));
+	}else
+	{
+		fwrite(&cur_component, sizeof(int), 1, logfile);
+	}
 	return 0;
 }
 
@@ -76,7 +99,8 @@ int JpegStegoLog::writeData(int cur_component)
 {
 	if(logfile==NULL)
 		return -1;
-	fprintf(logfile,"Current component: %s\n", toChar(cur_component));
+	if(!bin)	fprintf(logfile,"Current component: %s\n", toChar(cur_component));
+	else		fwrite(&cur_component, sizeof(int), 1, logfile);
 	return 0;
 }
 
@@ -84,7 +108,8 @@ int JpegStegoLog::writeCoef(int coef)
 {
 	if(logfile==NULL)
 		return -1;
-	fprintf(logfile,"%d\t", coef);
+	if(!bin)	fprintf(logfile,"%d\t", coef);
+	else		fwrite(&coef, sizeof(int), 1, logfile);
 	return 0;
 }
 
@@ -92,7 +117,7 @@ int JpegStegoLog::endBlock()
 {
 	if(logfile==NULL)
 		return -1;
-	fprintf(logfile,"\n============================\n\n");
+	if(!bin)		fprintf(logfile,"\n============================\n\n");
 	return 0;
 }
 
@@ -100,7 +125,7 @@ int JpegStegoLog::endStr()
 {
 	if(logfile==NULL)
 		return -1;
-	fprintf(logfile,"%\n");
+	if(!bin)		fprintf(logfile,"%\n");
 	return 0;
 }
 

@@ -25,9 +25,8 @@ protected:
 	int work_component;		//(All,Y,Cb,Cr) компонент в который встраиваются данные
 	JpegStegoLog *slog1;
 	JpegStegoLog *slog2;
-	bool blog;
+	JStegoData sData;
 	
-	JStegoData sData;	
 	
 	/*size_t width;
 	size_t height;
@@ -57,6 +56,13 @@ public:
 	int startJpegToJpeg(char *inf, char *outf);
 	int startBmpToJpeg(char *inf, char *outf);	
 	//void SetNextContainer(char *file){};
-	void LOG(bool log){blog = log;};
+	void LOG(bool log, bool bin=false){blog = log; binary = bin;};
+	void Koch(bool k=false){koch = k;};
+
+public:
+	bool blog;
+	bool binary;
+	bool koch;
+	int D;					//difference
 };
 #endif //JPEGSTEGOENCODER_H

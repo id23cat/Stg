@@ -60,11 +60,11 @@ int selectSign(JCOEF *coef, int position)
 	return 1;
 }
 
-LKoch KochZhaoPosition(JCOEF *coef)
+LKoch KochZhaoPosition(int pos)
 {
 	LKoch lk;
-	lk.l1 = KochZhaoPositions[0][0];
-	lk.l2 = KochZhaoPositions[0][1];
-	lk.l3 = KochZhaoPositions[0][2];
+	lk.l1 = KochZhaoPositions[pos][0];
+	lk.l2 = KochZhaoPositions[pos][1];
+	lk.l3 = KochZhaoPositions[pos][2];
 	return lk;
 }

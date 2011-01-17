@@ -15,6 +15,6 @@
 int selectPosition(JCOEF *coef);
 int selectSign(JCOEF *coef, int position);
 
-LKoch KochZhaoPosition(JCOEF *coef);
+LKoch KochZhaoPosition(int pos);
 
 #endif //METHODS_H

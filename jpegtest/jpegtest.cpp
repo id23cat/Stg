@@ -8,34 +8,82 @@
 #define TST 0x40	//01000000b
 #define LOG 0x20	//00100000b
 
+struct ARGS
+{
+	bool enc;
+	bool dec;
+	bool tst;
+	bool log;
+	bool bin;
+	bool koch;
+};
 
-BYTE ParseArgs(int argc, char* argv[]);
+
+ARGS ParseArgs(int argc, char* argv[]);
 void PrintUsage();
+
+
+//	Usage: jpegtest -[{edtlbk}l] input_file.[jpg|bmp] [output_file.jpg] [message_file] [difference(1-20)]
 
 int main(int argc, char* argv[])
 {
+	ARGS args;
+	args = ParseArgs(argc,argv);
 	try
 	{
-		JpegStegoEncoder jse;
-		cerr << "Encoding..."<<endl;
-		jse.SetMessageFile(argv[5]);
-		cerr<<(jse.Test(argv[1]) /*+ jse.Test(argv[3])*/)<<" bytes"<<endl;
-		jse.Encode(argv[1],argv[2],true);
-		//jse.Encode(argv[3],argv[4],true);
-		//jse.Encode(&argv[1],1,".",true); 
-		cerr << "\nDone\n";
-		JpegStegoDecoder jsd;
-		cerr << "Decoding..."<<endl;
-		jsd.Decode(argv[2]);
-		//jsd.Decode(argv[4]);
-		jsd.SaveMessageToFile(argv[6]);
-		cerr << "\ndone";
+		//if((args & ENC) != 0)		//then encoding
+		if(args.enc)						//then encoding
+		{
+			JpegStegoEncoder jse;
+			cout << "Encoding..."<<endl;
+			cout << argv[2] <<" to "<<argv[3]<<" whith "<<argv[4]<<endl;
+			jse.koch = args.koch;
+			jse.blog = args.log;
+			jse.binary = args.bin;
+			jse.D = atoi(argv[5]);
+			jse.SetMessageFile(argv[4]);		
+			jse.Encode(argv[2],argv[3],true);			
+			cout << "\nDone\n";			
+			if(args.dec)
+			{
+				JpegStegoDecoder jsd;				
+				cout << "Decoding..."<<endl;
+				cout << "from "<< argv[3]<<" to "<<argv[4]<<endl;
+				jsd.Decode(argv[3]);
+				//jsd.Decode(argv[4]);
+				jsd.SaveMessageToFile(argv[4]);
+				cout << "\ndone";		
+			}
+
+		//}else if((~args & ENC) != 0)		//then decoding
+		}else if(args.dec)	//then decoding
+		{
+			JpegStegoDecoder jsd;
+			cout << "Decoding..."<<endl;
+			cout << "from "<< argv[3]<<" to "<<argv[3]<<endl;
+			jsd.Decode(argv[2]);
+			//jsd.Decode(argv[4]);
+			jsd.SaveMessageToFile(argv[3]);
+			cout << "\ndone";		
+		//}else if((args & TST) != 0)		//then testing
+		}else if(args.tst)
+		{
+			JpegStegoEncoder jse;
+			cout << "Testing..."<<endl;
+			cout << argv[2]<<endl;
+			jse.koch = args.koch;
+			jse.blog = args.log;
+			jse.binary = args.bin;
+			cout <<(jse.Test(argv[2]) /*+ jse.Test(argv[3])*/)<<" bytes"<<endl;
+			cout << "\nDone\n";			
+		}		
 	}catch(Exception exc)
 	{
-		cerr << exc.getMessage();
+		cout << exc.getMessage();
+		system("pause");
 	}
-	cerr << "all done\n";
-	system("pause");
+	//cout << "all done\n";
+	//system("pause");
 	
 	return 0;
 }
@@ -43,9 +91,10 @@ int main(int argc, char* argv[])
 // return parameter (BYTE):
 // [|encode(e)(d)|test(t)|log(l)|...]
 
-BYTE ParseArgs(int argc, char* argv[])
+ARGS ParseArgs(int argc, char* argv[])
 {
-	BYTE retargs = 0;
+	ARGS retargs;
+	memset(&retargs,0,sizeof(ARGS));
 	for(int i=0; i<argc; i++)
 	{
 		if(argv[i][0]=='-')
@@ -55,13 +104,44 @@ BYTE ParseArgs(int argc, char* argv[])
 				switch(argv[i][j])
 				{
 				case 'e':
-					retargs = retargs|ENC;
+					//retargs = retargs|ENC;
+					retargs.enc=true;
+					if(argc <5)
+					{
+						PrintUsage();
+						exit(0);
+					}
+					break;
 				case 'd':
-					retargs = retargs|(~ENC);
+					//retargs = retargs &(~ENC);
+					retargs.dec = true;
+					if(argc <4)
+					{
+						PrintUsage();
+						exit(0);
+					}
+					break;
 				case 't':
-					retargs = retargs|TST;
+					//retargs = retargs|TST;
+					retargs.tst = true;
+					if(argc <3)
+					{
+						PrintUsage();
+						exit(0);
+					}
+					break;
 				case 'l':
-					retargs = retargs|LOG;
+					//retargs = retargs|LOG;
+					retargs.log = true;
+					break;
+				case 'b':
+					//retargs = retargs|LOG;
+					retargs.bin = true;
+					break;
+				case 'k':
+					//retargs = retargs|LOG;
+					retargs.koch = true;
+					break;
 				default:
 					PrintUsage();
 					exit(0);
@@ -76,11 +156,13 @@ BYTE ParseArgs(int argc, char* argv[])
 
 void PrintUsage()
 {
-	cerr << "Usage: jpegtest -[edtl] input_file.[jpg|bmp] [output_file.jpg] [message_file]"<<endl;
-	cerr << "Supported flags:"<<endl;
-	cerr << " e		Encoding"<<endl;
-	cerr << " d		Decoding"<<endl;
-	cerr << " t		Testing capacity"<<endl;
-	cerr << " l		Write coefficients to log file"<<endl;
+	cout << "Usage: jpegtest -[edtlk] input_file.[jpg|bmp] [output_file.jpg] [message_file] [difference(1-20)]"<<endl;
+	cout << "Supported flags:"<<endl;
+	cout << " e		Encoding"<<endl;
+	cout << " d		Decoding"<<endl;
+	cout << " t		Testing capacity"<<endl;
+	cout << " l		Write coefficients to log file"<<endl;
+	cout << " b		Write coefficients to log file in binary mode"<<endl;
+	cout << " k		Koch-Zhao encoding/decoding"<<endl;
 	return;
 }
