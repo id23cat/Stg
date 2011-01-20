@@ -16,6 +16,8 @@ struct ARGS
 	bool log;
 	bool bin;
 	bool koch;
+	BYTE qual;
+
 };
 
 
@@ -28,6 +30,7 @@ void PrintUsage();
 int main(int argc, char* argv[])
 {
 	ARGS args;
+	cout << argc <<" ";
 	args = ParseArgs(argc,argv);
 	try
 	{
@@ -36,12 +39,21 @@ int main(int argc, char* argv[])
 		{
 			JpegStegoEncoder jse;
 			cout << "Encoding..."<<endl;
-			cout << argv[2] <<" to "<<argv[3]<<" whith "<<argv[4]<<endl;
+			cout << argv[2] <<" to "<<argv[3];
 			jse.koch = args.koch;
 			jse.blog = args.log;
 			jse.binary = args.bin;
-			jse.D = atoi(argv[5]);
-			jse.SetMessageFile(argv[4]);		
+			if(argc>=6)
+				jse.D = atoi(argv[5]);
+			if(argc>=7)
+				jse.percent = atoi(argv[6]);
+			if(args.qual)
+				jse.quality = args.qual;
+			if(argc>=5)
+			{
+				cout <<" with "<<argv[4]<<endl;
+				jse.SetMessageFile(argv[4]);		
+			}
 			jse.Encode(argv[2],argv[3],true);			
 			cout << "\nDone\n";			
 			if(args.dec)
@@ -106,7 +118,7 @@ ARGS ParseArgs(int argc, char* argv[])
 				case 'e':
 					//retargs = retargs|ENC;
 					retargs.enc=true;
-					if(argc <5)
+					if(argc <4)
 					{
 						PrintUsage();
 						exit(0);
@@ -142,21 +154,31 @@ ARGS ParseArgs(int argc, char* argv[])
 					//retargs = retargs|LOG;
 					retargs.koch = true;
 					break;
+				case 'q':
+					//retargs = retargs|LOG;
+					retargs.qual = atoi(argv[i+1]);
+					break;
+				//case 'p':
+				//	//retargs = retargs|LOG;
+				//	retargs.percent = true;
+				//	break;
 				default:
 					PrintUsage();
 					exit(0);
 				}				
 			}
-			return retargs;
+			
 		}
 	}
-	PrintUsage();
-	exit(0);
+	return retargs;
+	/*PrintUsage();
+	exit(0);*/
 }
 
 void PrintUsage()
 {
-	cout << "Usage: jpegtest -[edtlk] input_file.[jpg|bmp] [output_file.jpg] [message_file] [difference(1-20)]"<<endl;
+	cout << "Usage: jpegtest -[edtlbkp] input_file.[jpg|bmp] [output_file.jpg] [message_file] [difference(1-20)] "
+		<<"[% bloks to write{25,50,75,100}] [-q "<<endl;
 	cout << "Supported flags:"<<endl;
 	cout << " e		Encoding"<<endl;
 	cout << " d		Decoding"<<endl;
@@ -164,5 +186,7 @@ void PrintUsage()
 	cout << " l		Write coefficients to log file"<<endl;
 	cout << " b		Write coefficients to log file in binary mode"<<endl;
 	cout << " k		Koch-Zhao encoding/decoding"<<endl;
+	cout << "-q		N[,...]   Compression quality (0..100; 5-95 is useful range)\n";
+	/*cout << " p		Capcity percent"<<endl;*/
 	return;
 }

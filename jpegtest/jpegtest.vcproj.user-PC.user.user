@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory="$(SolutionDir)\test"
-				CommandArguments="01src.bmp 01dst.jpg 03src.jpg 03dst.jpg Лущик.doc Лущик-out.doc"
+				CommandArguments="-el .\Images\800x600\1.bmp .\Images\800x600\1.jpg"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -51,6 +51,34 @@
 				Environment=""
 				EnvironmentMerge="true"
 				DebuggerFlavor="0"
+				MPIRunCommand=""
+				MPIRunArguments=""
+				MPIRunWorkingDirectory=""
+				ApplicationCommand=""
+				ApplicationArguments=""
+				ShimCommand=""
+				MPIAcceptMode=""
+				MPIAcceptFilter=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release_SSE2|Win32"
+			>
+			<DebugSettings
+				Command="$(TargetPath)"
+				WorkingDirectory=""
+				CommandArguments=""
+				Attach="false"
+				DebuggerType="3"
+				Remote="1"
+				RemoteMachine="USER-PC"
+				RemoteCommand=""
+				HttpUrl=""
+				PDBPath=""
+				SQLDebugging=""
+				Environment=""
+				EnvironmentMerge="true"
+				DebuggerFlavor=""
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

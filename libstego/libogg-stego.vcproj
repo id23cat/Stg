@@ -106,12 +106,14 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
+				Optimization="2"
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\jpeg-8a\&quot;;&quot;$(SolutionDir)\libogg\include&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\lib&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include\vorbis&quot;;&quot;$(SolutionDir)\libvorbis-1.2.3\include&quot;;&quot;$(SolutionDir)\libbmp&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBOGGSTEGO_EXPORTS"
+				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				EnableEnhancedInstructionSet="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"

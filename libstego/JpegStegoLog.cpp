@@ -33,7 +33,7 @@ int JpegStegoLog::openLOG(int component)
 	else if(component == Cr)
 		strcat_s(log_fname, 80, "Cr.log");
 	else
-		strcat_s(log_fname, 80, "ALL.log");
+		strcat_s(log_fname, 80, ".log");
 
 	if(bin)
 	{
@@ -90,7 +90,8 @@ int JpegStegoLog::writeData(int work_component,
 		fprintf(logfile,"Current component: %s\n", toChar(cur_component));
 	}else
 	{
-		fwrite(&cur_component, sizeof(int), 1, logfile);
+		short comp = (short)cur_component;
+		fwrite(&comp, sizeof(short), 1, logfile);
 	}
 	return 0;
 }
@@ -100,7 +101,11 @@ int JpegStegoLog::writeData(int cur_component)
 	if(logfile==NULL)
 		return -1;
 	if(!bin)	fprintf(logfile,"Current component: %s\n", toChar(cur_component));
-	else		fwrite(&cur_component, sizeof(int), 1, logfile);
+	else
+	{
+		short comp = (short)cur_component;
+		fwrite(&comp, sizeof(short), 1, logfile);
+	}
 	return 0;
 }
 
@@ -109,7 +114,7 @@ int JpegStegoLog::writeCoef(int coef)
 	if(logfile==NULL)
 		return -1;
 	if(!bin)	fprintf(logfile,"%d\t", coef);
-	else		fwrite(&coef, sizeof(int), 1, logfile);
+	else{short co = (short)coef;		fwrite(&coef, sizeof(short), 1, logfile);}
 	return 0;
 }
 

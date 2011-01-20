@@ -14,6 +14,11 @@ extern "C" {
 	#include "..\jpeg-8a\cdjpeg.h"
 }
 
+#define p0		0
+#define P25		1
+#define P50		2
+#define P75		3
+#define P100	4
 
 
 class JpegStegoEncoder :
@@ -26,6 +31,9 @@ protected:
 	JpegStegoLog *slog1;
 	JpegStegoLog *slog2;
 	JStegoData sData;
+	BYTE perc;				//procent parameter
+	BYTE Pi;					//счетчик процентов
+	
 	
 	
 	/*size_t width;
@@ -33,6 +41,7 @@ protected:
 	BYTE *rgb;*/
 //private:
 	virtual void InitJpegStego(bool encodeMessage);
+	void InitPercent();
 	//int selectPosition(JCOEF *coef);				//select position in block of coefficients (MCU)
 	//int selectSign(JCOEF *coef, int position);		//select sign by current coefficients
 	//bool readBMP(char *fname);
@@ -64,5 +73,7 @@ public:
 	bool binary;
 	bool koch;
 	int D;					//difference
+	int percent;
+	BYTE quality;
 };
 #endif //JPEGSTEGOENCODER_H

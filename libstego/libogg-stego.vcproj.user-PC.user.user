@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command=""
 				WorkingDirectory=""
-				CommandArguments=""
+				CommandArguments="-el .\Images\800x600\1.bmp .\Images\800x600\1.jpg"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -22,7 +22,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""
@@ -37,7 +37,7 @@
 			Name="Release|Win32"
 			>
 			<DebugSettings
-				Command=""
+				Command="jpegtest.exe -ebkl 1.bmp 1.jpg 1 400 75 "
 				WorkingDirectory=""
 				CommandArguments=""
 				Attach="false"
@@ -50,7 +50,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

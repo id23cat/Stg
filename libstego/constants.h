@@ -80,13 +80,13 @@ const int allowable_position[ALLOW] = {
 };
 
 // Допустимые позиции для Коха-Жао
-#define ALLOW_KOCH 18
+#define KOCH_MAX 18
 struct LKoch
 {
 	int l1, l2,l3;
 };
 
-const int KochZhaoPositions[ALLOW_KOCH][3] = {
+const int KochZhaoPositions[KOCH_MAX][3] = {
 	{2, 9, 10},
 	{9, 2, 10},
 	{3, 10, 11},
