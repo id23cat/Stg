@@ -136,6 +136,30 @@ void StegoEncoder::SetMessageFile(char *mesFile) throw(...)
 	delete mes;
 }
 
+void StegoEncoder::SetMessageFile(char *mesFile, size_t length) throw(...)
+{
+	FILE *instream;
+	size_t len;
+	if( fopen_s( &instream, mesFile, "rb" ) != 0 )
+	{
+		char str[256]={0};
+		sprintf(str,"Can not open file %s\n",mesFile);
+		throw Exception(str);		
+	};
+	fseek(instream, 0, SEEK_END);
+	len = ftell(instream);
+	if(len>length)			//read less then total file size
+		len = length;
+	BYTE * mes = new BYTE[len];
+	fseek(instream, 0, SEEK_SET);
+	len = fread(mes, sizeof(BYTE), len, instream);
+	//cout << *len << endl;
+	//cout << (char *) mes;
+	fclose(instream);
+	SetMessage(mes,len);
+	delete mes;
+}
+
 //void StegoEncoder::AddContainer(char *file)
 //{
 //

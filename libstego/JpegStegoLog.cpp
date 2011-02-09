@@ -26,13 +26,13 @@ void JpegStegoLog::setLogFileName(char fname[FNAME_LEN],char *ext)
 
 int JpegStegoLog::openLOG(int component)
 {
-	if(component == Y)
+	/*if(component == Y)
 		strcat_s(log_fname, 80, "Y.log");
 	else if(component == Cb)
 		strcat_s(log_fname, 80, "Cb.log");
 	else if(component == Cr)
 		strcat_s(log_fname, 80, "Cr.log");
-	else
+	else*/
 		strcat_s(log_fname, 80, ".log");
 
 	if(bin)

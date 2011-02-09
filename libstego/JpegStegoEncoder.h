@@ -27,11 +27,12 @@ class JpegStegoEncoder :
 	//!OutOfRangeException = true;
 protected:
 	
-	int work_component;		//(All,Y,Cb,Cr) компонент в который встраиваются данные
+	
 	JpegStegoLog *slog1;
 	JpegStegoLog *slog2;
 	JStegoData sData;
-	BYTE perc;				//procent parameter
+	
+	BYTE perc;				//percent parameter
 	BYTE Pi;					//счетчик процентов
 	
 	
@@ -53,6 +54,7 @@ protected:
 
 	static void StegoHideMessage(void *cinfo, JBLOCKROW *MCU_data);		//callback function
 	static void StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data);	//callback function
+	static void StegoKochZhaoTest(void *cinfo, JBLOCKROW *MCU_data);	//callback function
 	static void StegoTestContainer(void *cinfo, JBLOCKROW *MCU_data);	//callback function	
 	static void StegoTestContainer2(void* cinfo, int workspace[64],int blkn);		//callback function	
 public:
@@ -61,7 +63,7 @@ public:
 public:
 	int Encode(char *infile, char *outfile, bool pasteMes=false);
 	//int Encode(char **infiles, int count, char *dstdir=NULL, bool pasteMes=false);
-	size_t Test(char *infile, bool wrtLog=false);
+	size_t Test(char *infile, bool wrtLog=false, char *outfile=NULL);
 	int startJpegToJpeg(char *inf, char *outf);
 	int startBmpToJpeg(char *inf, char *outf);	
 	//void SetNextContainer(char *file){};
@@ -69,11 +71,15 @@ public:
 	void Koch(bool k=false){koch = k;};
 
 public:
-	bool blog;
-	bool binary;
-	bool koch;
+	bool blog;				//write text log
+	char *logfile;			// file name
+	bool binary;			//write binary log
+	bool koch;				//write with Koch-Zhao algorithm
+	bool random;			// write randomly
 	int D;					//difference
-	int percent;
-	BYTE quality;
+	int percent;			//percent capacity
+	BYTE quality;			//
+	int work_component;		//(All,Y,Cb,Cr) компонент в который встраиваются данные
+	int bit;				//{0,1} -- бит для тестирования Коха-Жао
 };
 #endif //JPEGSTEGOENCODER_H

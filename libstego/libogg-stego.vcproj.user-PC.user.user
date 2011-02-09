@@ -37,7 +37,7 @@
 			Name="Release|Win32"
 			>
 			<DebugSettings
-				Command="jpegtest.exe -ebkl 1.bmp 1.jpg 1 400 75 "
+				Command="jpegtest.exe -ebkl 1.bmp 1.jpg 1 400 75 -l 00.log"
 				WorkingDirectory=""
 				CommandArguments=""
 				Attach="false"

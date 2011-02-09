@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory="$(SolutionDir)\test"
-				CommandArguments="-el .\Images\800x600\1.bmp .\Images\800x600\1.jpg"
+				CommandArguments="jpegtest.exe -ekt  .\misc\0.bmp -o .\misc\0-25-5-Y-1.jpg -m random.mes -p 25 -D 5 -Y -r 1 -l 0-25-5-Y-1.log"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -66,8 +66,8 @@
 			>
 			<DebugSettings
 				Command="$(TargetPath)"
-				WorkingDirectory=""
-				CommandArguments=""
+				WorkingDirectory="$(SolutionDir)\test"
+				CommandArguments="jpegtest.exe -ek  .\misc\0.bmp -o .\misc\0-0-0.jpg -l 000.log"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -78,7 +78,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

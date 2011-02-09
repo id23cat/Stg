@@ -54,13 +54,14 @@ public:
 	virtual ~StegoEncoder(void);
 	void SetMessage(BYTE *mes, size_t len) throw(...);
 	void SetMessageFile(char *mesFile) throw(...);
+	void SetMessageFile(char *mesFile, size_t length) throw(...);
 	bool IsPasteMessage(){return paste_message;};			
 	//void AddContainer(char *file);
 	void SetDstDir(char *dir);
 public:
 	virtual int Encode(char *infile, char *outfile, bool pasteMes=false)=0;
 	//virtual int Encode(char **infiles, int count, char *dstdir=NULL, bool pasteMes=false)=0;
-	virtual size_t Test(char *infile, bool wrtLog=false)=0;				//count capacity of container in bytes
+	virtual size_t Test(char *infile, bool wrtLog=false, char *outfile=NULL)=0;				//count capacity of container in bytes
 };
 
 #endif /* STEGOENCODER_H_ */
