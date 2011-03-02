@@ -20,7 +20,7 @@ public:
 	class BitArrayIterator
 	{
 	protected:
-		BitArray *pArray;		//BitArray object pointer
+		BitArray *pArray;
 		size_t byteIndex;		//index in the BitArray object [0 ... length]
 		size_t bitIndex;		//index in the each BYTE of BitArray object [0...7]
 		bool enableOORException;	//allows to throw OutOfRangeException

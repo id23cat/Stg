@@ -294,6 +294,21 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 		for (int blkn = 0; blkn < ccinfo->blocks_in_MCU; blkn++)
 		{
 			compptr = ccinfo->cur_comp_info[ccinfo->MCU_membership[blkn]];
+			if(pJSE->blog) 
+			{
+				pJSE->slog1->writeData(compptr->component_id);
+				for(int i=0; i<8; i++)
+				{
+					for(int j=0; j<8; j++)
+					{						
+						pJSE->slog1->writeCoef(MCU_data[blkn][0][i*8+j]);
+					}
+					pJSE->slog1->endStr();
+				}				
+				pJSE->slog1->endBlock();
+			}
+
+			
 			if(pJSE->work_component == ALL || pJSE->work_component == compptr->component_id) //check current component
 			{
 				if(pJSE->paste_message && pJSE->mesArray.IsArraySet())
@@ -322,7 +337,10 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 								
 								MCU_data[blkn][0][DCT_pos.l3]-=d-d3;
 								MCU_data[blkn][0][DCT_pos.l1]+=d/*+1*/;						
-								MCU_data[blkn][0][DCT_pos.l2]+=d/*+1*/;						
+								MCU_data[blkn][0][DCT_pos.l2]+=d/*+1*/;
+								///*********************/
+								//MCU_data[blkn][0][0]=5*(pJSE->mit.byteIndex*8+pJSE->mit.bitIndex);								
+								///*********************/
 								pJSE->mit++;
 								break;
 							}else
@@ -338,10 +356,14 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 
 								MCU_data[blkn][0][DCT_pos.l3]+=d+d3;
 								MCU_data[blkn][0][DCT_pos.l1]-=d;
-								MCU_data[blkn][0][DCT_pos.l2]-=d;						
+								MCU_data[blkn][0][DCT_pos.l2]-=d;
+								///*********************/
+								//MCU_data[blkn][0][0]=5*(pJSE->mit.byteIndex*8+pJSE->mit.bitIndex);								
+								///*********************/
 								pJSE->mit++;
 								break;
 							}						
+							
 							
 						}
 						//pJSE->mit++;
@@ -359,29 +381,14 @@ void JpegStegoEncoder::StegoKochZhaoHide(void *cinfo, JBLOCKROW *MCU_data)
 						if(pJSE->Pi>4)
 							pJSE->Pi=1;
 				}
-			}
-
-			if(pJSE->blog) 
-			{
-				pJSE->slog1->writeData(compptr->component_id);
-				for(int i=0; i<8; i++)
-				{
-					for(int j=0; j<8; j++)
-					{						
-						pJSE->slog1->writeCoef(MCU_data[blkn][0][i*8+j]);
-					}
-					pJSE->slog1->endStr();
-				}				
-				pJSE->slog1->endBlock();
-			}
-
+			}			
 		}
 
 	}catch(OutOfRangeException oorExc)
 	{
-		//cerr<<oorExc.getMessage();
-		ccinfo->stego.isStego=0;
-		//pJSE->sData.isStego = 0;
+		//ccinfo->stego.isStego=0;
+		pJSE->paste_message=false;
+		
 	}
 	catch(Exception exc)
 	{
