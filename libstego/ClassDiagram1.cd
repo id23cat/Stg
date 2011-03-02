@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="APCRC16" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAFAAQAAAAAAAAAAAAAAAAAAgAAAAAAEAQAAgCA=</HashCode>
+      <FileName>AP_CRC16.H</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="APCRC32" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAAAAQAAAAQAAAAAAAAAAAAIAAAAAAAEAAACAEAAI=</HashCode>
+      <FileName>AP_CRC32.H</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Array" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAGQAgAAgQAJAAAABAEABAAAAQAAAEAAA=</HashCode>
+      <FileName>Array.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BitArray" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAABAASAAAAAAAAAwAAAEIAAAAAAAAAACQA=</HashCode>
+      <FileName>BitArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exception" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAABAAAAgACA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OutOfRangeException" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQBEAAAAAACAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EndOfMessageException" Collapsed="true">
+    <Position X="3" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEQAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamagedMessageException" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAACABEAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileNotFoundException" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAQAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Exception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JpegStegoAnalysis" Collapsed="true">
+    <Position X="3" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIAAAAIAAAAAAAQAAAAAEAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>JpegStegoAnalysis.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JpegStegoDecoder" Collapsed="true">
+    <Position X="0.75" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAIGEAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAQ=</HashCode>
+      <FileName>JpegStegoDecoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JpegStegoEncoder" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIYCEhAAAAAABAAQAAAAAAACAAABQAACAAACAA=</HashCode>
+      <FileName>JpegStegoEncoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSBStegoDecoder" Collapsed="true">
+    <Position X="3" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAIQ=</HashCode>
+      <FileName>LSBStegoDecoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSBStegoEncoder" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAhABAAEAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LSBStegoEncoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OggStegoDecoder" Collapsed="true">
+    <Position X="5.25" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAQAAAAIAAAAAAAAAAAAIAAAAAAAQAAAAAQ=</HashCode>
+      <FileName>OggStegoDecoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OggStegoEncoder">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAABAAAAIAAAAAACAAAAAKAAAABAACgAAAAA=</HashCode>
+      <FileName>OggStegoEncoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StegoArray" Collapsed="true">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAAQCAAAAAAAIAQAAAAAAAACAAEAEAAAA=</HashCode>
+      <FileName>StegoArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StegoDecoder" Collapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIAQAQAAAIAkAAAAAEAAAAAAEAAAAAQAgAAAE=</HashCode>
+      <FileName>StegoDecoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StegoEncoder" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEACABQIQAAAgEAABMAQAAAEAAAAEAASAAEAAA=</HashCode>
+      <FileName>StegoEncoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="OPointerStruct" Collapsed="true">
+    <Position X="10.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAAABAAA=</HashCode>
+      <FileName>LibInclude.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="APLI" Collapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="API64" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APint" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APvoid" Collapsed="true">
+    <Position X="23.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APbyte" Collapsed="true">
+    <Position X="14.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APchar" Collapsed="true">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APbool" Collapsed="true">
+    <Position X="12.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APlong" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APcrptr" Collapsed="true">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APshort" Collapsed="true">
+    <Position X="18" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APfloat" Collapsed="true">
+    <Position X="23.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APdouble" Collapsed="true">
+    <Position X="21.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APHANDLE" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APlongi" Collapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APshorti" Collapsed="true">
+    <Position X="19.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APccrptr" Collapsed="true">
+    <Position X="16.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APldouble" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APs" Collapsed="true">
+    <Position X="12.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APsint" Collapsed="true">
+    <Position X="21.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APslong" Collapsed="true">
+    <Position X="23.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APschar" Collapsed="true">
+    <Position X="16.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APsbyte" Collapsed="true">
+    <Position X="14.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APslptr" Collapsed="true">
+    <Position X="14.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APsshort" Collapsed="true">
+    <Position X="16.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APslongi" Collapsed="true">
+    <Position X="12.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APsshorti" Collapsed="true">
+    <Position X="18" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APu" Collapsed="true">
+    <Position X="19.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APuint" Collapsed="true">
+    <Position X="12.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APulong" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APushort" Collapsed="true">
+    <Position X="19.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APuchar" Collapsed="true">
+    <Position X="23.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APubyte" Collapsed="true">
+    <Position X="21.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APulptr" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APulongi" Collapsed="true">
+    <Position X="16.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="APushorti" Collapsed="true">
+    <Position X="21.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AP_Definition.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SBYTE" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>constants.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BYTE_b" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>constants.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="OggCallbackData" Collapsed="true">
+    <Position X="10.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LibInclude.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="CRC16METHOD" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>AP_CRC16.H</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CRC32METHOD" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>AP_CRC32.H</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
