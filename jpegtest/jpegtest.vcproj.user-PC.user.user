@@ -11,7 +11,7 @@
 			<DebugSettings
 				Command="$(TargetPath)"
 				WorkingDirectory="$(SolutionDir)\test"
-				CommandArguments="jpegtest.exe -ekt .\misc\1.bmp -o 1-50-5-Y-0.jpg -m random.mes -D 5 -p 50 -Y -r 0 -lb 1-50-5-Y-0.log"
+				CommandArguments="jpegtest.exe -ekt 099.bmp -o 099-50-5-Y-0.jpg -m random.mes -D 5 -p 50 -Y -r 0 -lb 099-50-5-Y-0.log"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"

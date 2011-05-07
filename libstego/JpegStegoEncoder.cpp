@@ -746,6 +746,7 @@ int JpegStegoEncoder::startBmpToJpeg(char *inf, char *outf)
 		argv[4]= qua;
 	}
 
+
 	return main_cjpeg(argc, argv, sData);
 //	readBMP(inf);
 //	struct jpeg_compress_struct cinfo;
